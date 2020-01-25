@@ -25,7 +25,7 @@ To install this theme, just download the zip version of this repository and unzi
 
 You should now have all the theme files under
 ```
-_PATH_TO_GRAV_CSM_/user/themes/upmorph-online-soon
+/your/site/grav/user/themes/upmorph-online-soon
 ```
 
 
