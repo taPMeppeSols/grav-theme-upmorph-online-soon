@@ -1,4 +1,4 @@
-# uPMORph online soon :soon:
+# uPMORph online soon :cool: :new: :soon:
 
 ![Screenshot](screenshot.jpg)
 
@@ -10,7 +10,7 @@ It should be used as kickass placeholding template to
 - or set your site on maintenance (**back** online soon) :hammer_and_wrench: . 
 
 
-# Installation
+# Installation :nut_and_bolt:
 Installing this theme can be done in one of two ways. The GPM (_Grav Package Manager_) installation method enables you to quickly and easily install the theme with a simple terminal command, while the manual method enables you to do so via a zip file.
 
 ## GPM Installation (_Preferred_)
@@ -29,7 +29,7 @@ _PATH_TO_GRAV_CSM_/user/themes/upmorph-online-soon
 ```
 
 
-# Updating
+# Updating :gear:
 As development for this theme continues, new versions may become available that add additional features and functionality, improve compatibility with newer Grav releases, and generally provide a better user experience. Updating this theme is easy, and can be done through Grav's GPM system, as well as manually.
 
 ## GPM Update (_Preferred_)
@@ -60,7 +60,7 @@ If you want to set this theme as the default theme, you can do so by following t
 Once this is done, you should be able to see the new theme on the frontend. Keep in mind any customizations made to the previous theme will not be reflected as all of the theme and templating information is now being pulled from the **upmorph-online-soon** folder.
 
 
-# Customisation :gear:
+# Customisation :hammer: :wrench:
 All customisation should be done using [theme inheritance](https://learn.getgrav.org/16/themes/customization#theme-inheritance) to allow for future updates. This way we can keep updating and you can keep the feature you care about. I hope we all have as much fun as we. Good luck :smiley:
 
 
@@ -68,5 +68,5 @@ All customisation should be done using [theme inheritance](https://learn.getgrav
 The theme created as response to our need for a simple and lightweight solution for the online presence of our team in the year 2019. Therefore, currently there is no better preview than our homepage: https://tapmeppe.solutions .
 
 
-# You want to support us? :ok_hand: :muscle:
-No problem buddy. We can always use loose change (:money_with_wings:) for a cup of :coffee:. You can donate [here](paypal.me/tapmeppesols) :gift:.
+# You want to support us? :ok_hand: :gift:
+No problem buddy. We can always use loose change :money_with_wings: for a cup of :coffee:. You can donate [here](https://paypal.me/tapmeppesols).
