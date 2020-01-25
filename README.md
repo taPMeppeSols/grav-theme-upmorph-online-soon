@@ -13,14 +13,14 @@ It should be used as kickass placeholding template to
 # Installation :nut_and_bolt:
 Installing this theme can be done in one of two ways. The GPM (_Grav Package Manager_) installation method enables you to quickly and easily install the theme with a simple terminal command, while the manual method enables you to do so via a zip file.
 
-## GPM Installation (_Preferred_)
+### GPM Installation (_Preferred_)
 The simplest way to install this theme is via the [Grav Package Manager (GPM)](http://learn.getgrav.org/advanced/grav-gpm) through your system's Terminal (_also called the command line_). From the root of your Grav install type:
 ```
 bin/gpm install upmorph-online-soon
 ```
 This will install this theme into your `/user/themes` directory within Grav. Its files can be found under `/your/site/grav/user/themes/upmorph-online-soon`.
 
-## Manual Installation
+### Manual Installation
 To install this theme, just download the zip version of this repository and unzip it under `/your/site/grav/user/themes`. Then, rename the folder to `upmorph-online-soon`. You can find these files either via [GetGrav.org](https://getgrav.org/downloads/themes) or on [GitHub](https://github.com/taPMeppeSols/grav-theme-upmorph-online-soon).
 
 You should now have all the theme files under
@@ -32,14 +32,14 @@ _PATH_TO_GRAV_CSM_/user/themes/upmorph-online-soon
 # Updating :gear:
 As development for this theme continues, new versions may become available that add additional features and functionality, improve compatibility with newer Grav releases, and generally provide a better user experience. Updating this theme is easy, and can be done through Grav's GPM system, as well as manually.
 
-## GPM Update (_Preferred_)
+### GPM Update (_Preferred_)
 The simplest way to update this theme is via the [Grav Package Manager (GPM)](http://learn.getgrav.org/advanced/grav-gpm). You can do this with this by navigating to the root directory of your Grav install using your system's Terminal (_also called command line_) and typing the following:
 ```
 bin/gpm update upmorph-online-soon
 ```
 This command will check your Grav install to see if this theme is due for an update. If a newer release is found, you will be asked whether or not you wish to update. To continue, type `y` and hit `enter`. The theme will automatically update and clear Grav's cache.
 
-## Manual Update
+### Manual Update
 Manually updating this theme is pretty simple. Here is what you will need to do to get this done:
 * Delete the `your/site/user/themes/upmorph-online-soon` directory.
 * Download the new version of the this theme from either via [GetGrav.org](http://getgrav.org/downloads/themes).
