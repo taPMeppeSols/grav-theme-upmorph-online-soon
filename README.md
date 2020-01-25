@@ -61,7 +61,7 @@ Once this is done, you should be able to see the new theme on the frontend. Keep
 
 
 # Customisation :hammer: :wrench:
-All customisation should be done using [theme inheritance](https://learn.getgrav.org/16/themes/customization#theme-inheritance) to allow for future updates. This way we can keep updating and you can keep the feature you care about. I hope we all have as much fun as we. Good luck :smiley:
+All customisation should be done using [theme inheritance](https://learn.getgrav.org/16/themes/customization#theme-inheritance) to allow for future updates. This way we can keep updating and you can keep the feature you care about. I hope we all have as much fun as we. Good luck :smiley: :muscle: :metal: .
 
 
 # Preview :see_no_evil: :hear_no_evil: :speak_no_evil:
@@ -69,4 +69,6 @@ The theme created as response to our need for a simple and lightweight solution 
 
 
 # You want to support us? :ok_hand: :gift:
-No problem buddy. We can always use loose change :money_with_wings: for a cup of :coffee:. You can donate [here](https://paypal.me/tapmeppesols).
+No problem buddy. We can always use some loose change :money_with_wings: for a cup of :coffee:. You can donate [here](https://paypal.me/tapmeppesols). 
+
+# :v: :wave: :end:
