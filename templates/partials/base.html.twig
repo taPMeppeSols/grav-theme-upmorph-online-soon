@@ -1,0 +1,98 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+<!DOCTYPE HTML>
+<html 
+	lang="{{ html_lang }}"
+	{# lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}" #}
+	class="{{ browser.browser }} {{ browser.platform }}"	
+>
+	<head>
+		{% block head %}
+			<meta charset="utf-8" />
+			<title>
+					{% if config.theme.title.enabled %} 
+						{{ site.title|e('html') }} 
+						{% if header.title %} :: {{ header.title|e('html') }}{% endif %}
+					{% elseif header.title %} {{ header.title|e('html') }}{% endif %}
+			</title>
+		
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+			{% include 'partials/metadata.html.twig' %}
+
+			{% if config.theme.favicon %}
+				{# @see https://twig.symfony.com/doc/3.x/tags/for.html#iterating-over-keys #}
+				{% for favicon in config.theme.favicon %} {# one round #}
+					<link rel="icon" type="{{ favicon.type }}" href="{{ favicon.path }}" />
+				{% endfor %}
+			{% else %}
+				<link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
+			{% endif %}
+			
+			<link rel="canonical" href="{{ page.url(true, true) }}" />
+		{% endblock head %}
+
+		{# @see https://learn.getgrav.org/16/themes/asset-manager #}
+		{% block stylesheets %}
+			{% do assets.addCss('theme://assets/css/style.css', 1) %}
+		{% endblock %}
+		{% block javascripts %}
+			{% do assets.addJs('theme://assets/js/logic.js', {group:'bottom'}) %}
+		{% endblock %}
+
+		{% block assets deferred %}
+			{{ assets.css()|raw }}
+			{{ assets.js()|raw }}
+		{% endblock %}
+	</head>
+	<body id="top" class="is-preload {{ page.header.body_classes }}">
+		<aside id="slider">
+			{% block background %}
+				{% include 'partials/slider.html.twig' %}
+			{% endblock %}
+			<section class="mask"></section>
+		</aside>
+		<article id="body">
+			<header>
+				{% block header %}
+					{% include 'partials/header.html.twig' %}
+				{% endblock %}
+			</header>
+			<main>
+				{% block body %}{% endblock %}
+				{% include 'partials/registration.html.twig' %}
+			</main>
+			<footer>
+				{% block footer %}
+					{% include 'partials/footer.html.twig' %}
+				{% endblock %}
+			</footer>
+		</article>
+		<aside>{% include 'partials/modals.html.twig' %}</aside>
+
+		{% block bottom %}
+			{# 
+				PM (15.12.2019) used in main.js to adapt main.js to GRAV 
+				<script>const UPMORPH_THEME_URL = '{{ theme_url }}/{{ theme_dir|basename }}.php';</script>
+			#}
+			{% set recipients = [] %}
+			{% for recipient in config.theme.registration_recipients %}
+				{% set recipients = recipients|merge([recipient.recipient]) %}
+			{% endfor %}
+			{#
+				<pre>{{ config.theme.registration_recipients|print_r }}</pre>
+				<pre>{{ config.theme.registration_recipients|json_encode }}</pre>
+				<pre>{{ recipients|print_r }}</pre>
+			#}
+			<script>
+				const UPMORPH = {
+					slug: '{{ config.theme.slug }}',
+					lang: '{{ html_lang }}',
+					//lang: '{{ grav.language.getActive ?: grav.config.site.default_lang }}',
+					qwertzuiop: '{{ recipients|json_encode|base64_encode|base64_encode }}',
+					title: '{{ site.title|base64_encode }}'
+				};
+			</script>
+			{{ assets.js('bottom')|raw }}
+		{% endblock %}
+	</body>
+</html>

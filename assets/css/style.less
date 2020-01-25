@@ -1,0 +1,597 @@
+/** 
+	taPMeppe solutions (15.12.2019)
+	
+	inspired by the project 'eventually' @see https://html5up.net/eventually
+
+	font: Roboto
+	@source https://fonts.googleapis.com/css?family=Roboto:400,700
+	@see https://www.maketecheasier.com/use-google-roboto-font-everywhere/ 
+	@tutorial https://www.fontsquirrel.com/fonts/roboto
+	@tutorial https://fonts.google.com/specimen/Roboto?selection.family=Roboto
+
+	font: fontawesome v4 >> icomoon
+	@see https://icomoon.io
+	@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+*/
+
+@import 'roboto';
+@import 'icomoon';
+
+
+//#### ATTRIBUTES #####
+@color_bg: #2B2B2B;
+@color_font: #A9B7C6;
+@color_green: #317f43;
+@color_yellow: #ff9800;
+@color_red: #DC4C46; //w3.css 2017-grenadine
+
+@duration: .5s;
+@dim: 1em;
+@dim_2: @dim / 2;
+@dim_pt: 12pt;
+@dim_pt_2: @dim_pt + 3pt;
+
+@dim_margin: 5%;
+@dim_width_body: 500px;
+@dim_vp_small_max: @dim_width_body + 150px;
+@dim_vp_large_min: @dim_vp_small_max + 1px;
+@dim_vp_small_max_h: @dim_vp_small_max + 200px;
+@dim_vp_large_min_h: @dim_vp_small_max_h + 1px;
+
+@dim_width_max: ~"calc(100% - @{dim_margin}*2)"; //the correction is done because of the value of`article#body::padding`
+
+
+//#### FUNCTIONS #####
+.fct_h(@size){
+	font-size: @size;
+	line-height: @dim;
+
+	@media screen and (max-width: @dim_vp_small_max){
+		font-size: @size - @dim_2;
+	}
+}
+
+.fct_h_100 { height: 100%; }
+.fct_hide { display: none }
+.fct_pointer { cursor: pointer }
+.fct_roboto { font-family: "robotoregular",sans-serif }
+.fct_transition(@duration, @property: opacity){
+	-moz-transition: @property @duration ease-in-out;
+	-webkit-transition: @property @duration ease-in-out;
+	-ms-transition: @property @duration ease-in-out;
+	transition: @property @duration ease-in-out;
+}
+.fct_transition_start {
+	-moz-transform: translateX(0);
+	-webkit-transform: translateX(0);
+	-ms-transform: translateX(0);
+	transform: translateX(0);
+}
+.fct_transition_end {
+	-moz-transform: translateX(-25%);
+	-webkit-transform: translateX(-25%);
+	-ms-transform: translateX(-25%);
+	transform: translateX(-25%); 
+}
+.fct_animation(@duration){
+	-moz-animation: bg @duration linear infinite;
+	-webkit-animation: bg @duration linear infinite;
+	-ms-animation: bg @duration linear infinite;
+	animation: bg @duration linear infinite;
+}
+
+
+//#### DESIGN #####
+html, 
+body 
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	.fct_h_100;
+	width: 100%;
+	overflow: hidden;
+}
+body {
+	.fct_roboto;
+	font-size: @dim_pt;
+	font-weight: 400;
+	line-height: @dim + @dim_2;
+	background-color: @color_bg;
+	color: @color_font;
+	position: relative;
+	z-index: 5;
+
+	h1, h2, h3, h4, h5, h6, p, ul //override the native behaviour
+	{
+		margin-top: 0;
+		margin-bottom: @dim_2; //half of the self font-size
+	}
+	h1 { .fct_h(@dim * 4) }
+	h2 { .fct_h(@dim * 3 + @dim_2) }
+	h3 { .fct_h(@dim * 3) }
+	h4 { .fct_h(@dim * 2 + @dim_2) }
+	h5 { .fct_h(@dim * 2) }
+	h6 { .fct_h(@dim + @dim_2) }
+	ul { padding-left: @dim + @dim_2 }
+	a { 
+		color: @color_green;
+		text-decoration: none;
+		border: none;
+		display: inline-block;
+		.fct_transition(@duration, color);
+
+		&:hover { color: lighten(@color_green, 10%); }
+	}
+	button ,
+	.button
+	{
+		.fct_roboto;
+		font-weight: 700;
+		text-align: center;
+		padding: @dim_pt;
+		.fct_transition(@duration, all);
+		.fct_pointer;
+		white-space: nowrap
+	}
+	//*[data-target]{ display: block }
+
+	aside#slider {
+		opacity: .375;
+		.fct_transition(@duration*4);
+    position: fixed;
+		left: 0;
+		top: 0;
+		height: 100%;
+    width: 100%;
+		z-index: 5;
+		
+		div.slide {
+			opacity: 0;
+			-moz-transition: opacity 3s ease;
+			-webkit-transition: opacity 3s ease;
+			-ms-transition: opacity 3s ease;
+			transition: opacity 3s ease;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+			position: absolute;
+			height: 100%;
+			left: 0;
+			top: 0;
+			width: 150%;
+			visibility: hidden;
+
+			&.visible {
+				.fct_animation(45s);
+				opacity: 1;
+				visibility: visible;
+
+				@media screen and (max-width: 1280px) { .fct_animation(29.25s) }
+				@media screen and (max-width: 736px) { .fct_animation(18s) }
+				&.top { z-index: 10; }
+			}
+			&:only-child {
+				-moz-animation-direction: alternate !important;
+				-webkit-animation-direction: alternate !important;
+				-ms-animation-direction: alternate !important;
+				animation-direction: alternate !important; 
+			}
+		}
+		section.mask {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			z-index: 20;
+			background-color: rgba(@color_bg, .3);
+		}
+	}
+	article#body {
+		position: absolute;
+		padding: 0 @dim_margin;
+		width: @dim_width_max;
+		height: 100%;
+		overflow-y: auto;
+		z-index: 100;
+		
+		header {
+			min-height: 100px;
+			//max-height: 200px; //simple security measure
+			//height: 15%;
+			margin-bottom: @dim_margin*2;
+
+			//* { .fct_h_100 }
+			a.logo > img { 
+				max-height: 100px;
+				&.upmorph { margin-left: -10% } //visual correction of taPMeppe solutions logo
+			}
+			button {
+				color: @color_font;
+				background: transparent;
+				border: solid 2px @color_font;
+				width: 100%;
+				font-size: @dim_pt;
+
+				&:hover {
+					background: @color_font;
+					color: @color_bg;
+				}
+				@media screen and (max-width: @dim_vp_small_max){
+					font-size: @dim_pt_2;
+				}
+			}
+			nav { 
+				display: flex;
+
+				> div { 
+					position: relative;
+					
+					div#languages {
+						position: absolute;
+						width: 100%;
+						z-index: 10;
+					}
+				}
+			}
+			.languages { 
+				text-transform: uppercase;
+
+				&.dropdown {
+					display: flex;
+
+					&::after {
+						content: '';
+						display: block;
+						margin-left: @dim_pt/2;
+
+						//@see https://css-tricks.com/snippets/css/css-triangle/
+						width: 0; 
+						height: 0; 
+						border-left: @dim_pt_2/2 solid transparent;
+						border-right: @dim_pt_2/2 solid transparent;
+						border-top: @dim_pt_2 solid;
+
+						@media screen and (max-width: @dim_vp_small_max){
+							margin-left: @dim_pt*2/3;
+							border-left: @dim_pt_2*2/3 solid transparent;
+							border-right: @dim_pt_2*2/3 solid transparent;
+							border-top: @dim_pt_2 + 3pt solid;
+						}
+					}
+				}
+				> a {
+					text-transform: uppercase;
+					display: block;
+					padding: @dim/2 @dim;
+					border: solid 2px @color_font;
+					background: @color_bg;
+					
+					@media screen and (max-width: @dim_vp_small_max){ font-size: @dim_pt_2; }
+				}
+			}
+		}
+		main {
+			@media screen and (min-height: @dim_vp_large_min_h){
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: @dim_width_max;
+			}
+			@media screen and (min-height: @dim_vp_large_min_h) and (min-width: @dim_vp_large_min){
+				width: @dim_width_body;
+			}
+
+			> section {
+				&:nth-child(n+2) { margin-top: @dim * 2; }
+				&#registration > div {
+					&.privacy-policy {
+						@dim_privacy: 1.5em;
+						@factor_privacy: .5em;
+						@dim_factor_privacy: @dim_privacy + @factor_privacy;
+
+						display: flex;
+						margin-bottom: 1em;
+
+						@media screen and (max-height: @dim_vp_small_max_h){
+							padding: @factor_privacy;
+						}
+						@media screen and (max-width: @dim_vp_small_max){
+							padding: @factor_privacy;
+						}
+						> div:first-child { 
+							width: @dim_factor_privacy;
+							min-width: @dim_pt * 2.5; //40px
+							
+							@media screen and (max-height: @dim_vp_small_max_h){
+								width: @dim_factor_privacy + @factor_privacy;
+							}
+							@media screen and (max-width: @dim_vp_small_max){
+								width: @dim_factor_privacy + @factor_privacy;
+							}
+						}
+						input[type=checkbox] {
+							.fct_hide;
+
+							~ label.checkbox {
+								position: relative;
+								display: block;
+								.fct_pointer;
+								
+								/**
+								 * @source https://getbootstrap.com/docs/4.4/components/forms/
+								 * @see https://graphemica.com/%E2%9C%94 \U2714
+								 * @see https://www.fileformat.info/info/unicode/char/2713/index.htm \U2713
+								 * @see https://www.fileformat.info/info/unicode/char/2713/check_mark.svg
+								 */
+								&::before,
+								&::after
+								{
+									position: absolute;
+									display: block;
+									//pointer-events: none;
+								}
+								&::before {
+									@dim_privacy_small: @dim_privacy + @factor_privacy;
+									
+									content: "";
+									width: @dim_privacy;
+									height: @dim_privacy;
+									background-color: @color_font;
+									border: @color_bg solid 1px;
+									transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
+	
+									@media screen and (max-height: @dim_vp_small_max_h){
+										width: @dim_privacy_small;
+										height: @dim_privacy_small;
+									}
+									@media screen and (max-width: @dim_vp_small_max){
+										width: @dim_privacy_small;
+										height: @dim_privacy_small;
+									}
+								}
+								@media screen and (max-height: @dim_vp_small_max_h){
+									margin-top: -10%; //empiric value
+								}
+								@media screen and (max-width: @dim_vp_small_max){
+									margin-top: -10%; //empiric value
+								}
+							}
+							&:not(:checked).highlight ~ label.checkbox::before { border: @color_red solid 2px }
+							&:checked ~ label.checkbox {
+								&::before {
+									background-color: @color_green;
+									border-color: @color_font;
+								}
+								&::after {
+									//top: 50%;
+									left: 40%;
+									transform: translateX(-50%);
+									content: "\2714"; //\U2713 : thin check
+									font-weight: bolder;
+									text-align: center;
+									font-size: @dim_privacy;
+									color: @color_font;
+
+									@media screen and (max-height: @dim_vp_small_max_h){
+										//empiric values
+										margin-top: 10%;
+										left: 45%;
+										font-size: @dim_factor_privacy;
+									}
+									@media screen and (max-width: @dim_vp_small_max){
+										//empiric values
+										margin-top: 10%;
+										left: 45%;
+										font-size: @dim_factor_privacy;
+									}
+								}
+							}
+						}
+						span.button { 
+							padding: initial;
+							color: @color_green
+						}
+					}
+					&.fields {
+						@media screen and (min-width: @dim_vp_large_min){
+							display: flex;
+							align-items: center;
+						}
+						
+						> * {
+							border-radius: 5px;
+							border: none;
+						}
+						> input {
+							@dim_border: 2px;
+	
+							width: 75%; //empiric value; the rest is for the button
+							height: @dim * 3;
+							.fct_roboto;
+							font-weight: bold;
+			
+							.fct_transition(@duration, all);
+							background-color: transparent;
+							border: solid @dim_border rgba(@color_font, 0.35);
+							color: inherit;
+							display: block;
+							outline: 0;
+							padding: 0 @dim;
+							
+							@media screen and (min-width: @dim_vp_large_min){
+								max-width: 20em; //empiric value
+							}
+							
+							&:focus {
+								background-color: @color_bg;
+								border-color: @color_green;
+								font-size: @dim;
+								
+								@media screen and (max-width: @dim_vp_small_max){
+									width: ~"calc(100% - @{dim_margin}*2 - @{dim_border}*2 - 1px)";
+								}
+								~ button { font-size: @dim }
+							}
+							&.name { //this is the honeypot
+								.fct_hide!important;
+								position: fixed;
+								top: -100%
+							}
+						}
+						> button {
+							margin: 0 @dim;
+							color: lighten(@color_font, 10%);
+							height: @dim * 3.5;
+							padding-top: @dim;
+							padding-bottom: @dim;
+			
+							@media screen and (max-width: @dim_vp_small_max){
+								margin: @dim 0;
+							}
+							&:disabled {
+								background: @color_bg;
+								border: @color_font solid 1px;
+								cursor: not-allowed;
+							}
+							&:not(:disabled){
+								background: @color_green;
+								border: darken(@color_green, 10%) solid 1px;
+								//.fct_pointer;
+								
+								&:hover { 
+									background: lighten(@color_green, 10%); 
+									color: @color_bg;
+								}
+							}
+						}
+						&:hover > * { font-size: @dim }
+					}
+				}
+				&.notification {
+					padding: @dim;
+					border-left: solid @dim;
+					font-weight: bold;
+					background: rgba(@color_bg, .75);
+		
+					&:not(.active){ .fct_hide }
+					&.success {
+						border-left-color: @color_green;
+						color: @color_green
+					}
+					&.exists {
+						border-left-color: @color_yellow;
+						color: @color_yellow
+					}
+					&.error {
+						border-left-color: @color_red;
+						color: @color_red
+					}
+				}
+			}
+		}
+		footer {
+			@dim_li_padding: .25em;
+
+			color: rgba(@color_font, 0.5);
+			
+			@media screen and (min-height: @dim_vp_large_min_h){
+				position: absolute;
+				width: @dim_width_max;
+				bottom: 0
+			}
+			@media screen and (max-height: @dim_vp_small_max_h){
+				margin-top: @dim_margin*2;
+			}
+			> ul {
+				list-style: none;
+				padding-left: 0;
+				margin: 0 -@dim_li_padding;
+
+				&.icons > li {
+					.fct_transition(@duration);
+					
+					@media screen and (min-width: @dim_vp_large_min){
+						&:not(:hover) { opacity: .5 }
+					}
+				}
+				&.copyright { margin-bottom: 0; }
+				> li {
+					display: inline-block;
+					margin: 0 @dim_li_padding @dim_li_padding*2 @dim_li_padding;
+
+					a { 
+						padding: @dim_li_padding*2;
+						background: @color_font;
+						border-radius: 50%;
+						.fct_pointer;
+	
+						@media screen and (min-width: @dim_vp_large_min){
+							font-size: 1.25em;
+						}
+						@media screen and (max-width: @dim_vp_small_max){
+							font-size: 1.35em;
+						}
+					}
+				}
+			}
+		}
+	}
+	div.modal {
+		&:not(.active){ .fct_hide }
+
+		&.full {
+			position: fixed;
+			z-index: 150;
+			top: 0;
+			left: 0;
+			width: ~"calc(100% - @{dim_pt} * 2)";
+			height: ~"calc(100% - @{dim_pt} * 2)";
+			padding: @dim_pt;
+			background: rgba(@color_bg, .75);
+			overflow: auto;
+
+			> * {
+				width: 100%;
+				max-width: @dim_vp_small_max + 100px;
+			}
+			> h2 {
+				display: flex;
+				text-transform: capitalize;
+				margin: .5em auto;
+
+				@media screen and (max-width: @dim_vp_small_max){ font-size: 2.25em }
+				> div {
+					&:first-child { flex: 5 }
+					&.button {
+						font-size: 2em;
+						padding: 0;
+
+						&:hover { color: @color_red; }
+					}
+				}
+			}
+			> div { margin: .5em auto 1em auto }
+			h3, h4, h5 { margin-top: 1em }
+		}
+	}
+}
+
+//transitions
+@-moz-keyframes bg {
+	0% { .fct_transition_start }
+	100% { .fct_transition_end } 
+}
+@-webkit-keyframes bg {
+	0% { .fct_transition_start }
+	100% { .fct_transition_end } 
+}
+@-ms-keyframes bg {
+	0% { .fct_transition_start }
+	100% { .fct_transition_end } 
+}
+@keyframes bg {
+	0% { .fct_transition_start }
+	100% { .fct_transition_end } 
+}

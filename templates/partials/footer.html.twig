@@ -1,0 +1,28 @@
+{#
+	PM (16.12.2019) this script is used to generate the snippet listing the social networks
+
+	@see https://learn.getgrav.org/16/themes/twig-filters-functions#regex-replace-function
+	@see https://alvinalexander.com/drupal/drupal-8-how-string-starts-ends-with-twig-templates
+	#alternative to `regex_replace` {% if url and url starts with 'https://' %}
+#}
+
+{% if config.theme.social_networks.order %} {# TRUE if the order has been manually set by the administrator #}
+	<ul class="icons custom">
+		{% for data in config.theme.social_networks.order %}
+			{% set network = data.target %}
+			{% set url = config.theme.social_networks["urls_" ~ network] %}
+			{% if url %}<li><a href="{{ regex_replace(url, '#^(https?://)?#', 'https://') }}" target="_blank" class="icon-{{ network|replace({'_': "-"}) }}"></a></li>{% endif %}
+		{% endfor %}
+	</ul>
+{% else %} {# TRUE if the default/alphabetical order is used #}
+	<ul class="icons alphabetical">
+		{% for network in ['facebook', 'github', 'instagram', 'linkedin', 'tumblr', 'twitter', 'whatsapp', 'xing'] %}
+			{% set url = config.theme.social_networks["urls_" ~ network] %}
+			{% if url %}<li><a href="{{ regex_replace(url, '#^(https?://)?#', 'https://') }}" target="_blank" class="icon-{{ network|replace({'_': "-"}) }}"></a></li>{% endif %}
+		{% endfor %}
+	</ul>
+{% endif %}
+<ul class="copyright">
+	<li>&copy; {{ now | date("Y") }}</li>
+	<li>{{ site.title }}</li>
+</ul>

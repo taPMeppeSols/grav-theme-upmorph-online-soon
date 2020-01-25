@@ -1,0 +1,111 @@
+{# 
+	PM (15.12.2019) this script is used to generate the registration form
+	the recipient address entered is only used if it is a valid email address 
+
+	@since PM (20.12.2019) @deprecated but works well if the goal is validate an email address
+	{% if theme.registration_recipient matches '#^[\\w.%+-]+@[\\w.-]+\.[A-Za-z]{2,}$#' %}
+#}
+
+{# {% import _self as macros %} #}
+
+{% macro registration_response(response, class, data) %}
+	{% if response == 'success' or response == 'exists' %}
+		<section class="notification active {{ response }} {{ class }}">
+			{{ data['response_' ~ response] }}
+		</section>
+	{% else %}
+		<section class="notification active error {{ class }}">
+			{{ data.response_error }}
+		</section>
+	{% endif %}
+{% endmacro %}
+
+{% macro registration_form(class, theme, pages, data) %}
+	<section id="registration" class="{{ class }}">
+		{% set object = null %}
+		{% set regex = '/\\[([^\\[\\]]+)\\]/' %}
+		{% set replacer = '<span class="button" data-target="privacy_policy">$1</span>' %}
+
+		{% if theme.privacy_policy_page %} {# TRUE if the page selection is NOT empty #}
+			{% for page in pages.children if object is null %}
+				
+				{% if page.isPage and page.route == theme.privacy_policy_page and page.header.title and page.content %}
+					<div class="privacy-policy standalone">
+						<div>
+							<input id="privacy_policy_checkbox" type="checkbox" class="privacy-policy">
+							<label for="privacy_policy_checkbox" class="checkbox"></label>
+						</div>
+						<div>{{ page.header.title|regex_replace(regex, replacer) }}</div> {# wrap & highlight the term #}
+					</div>
+					{% set object = page %}
+				{% endif %}
+
+			{% endfor %}
+		{% endif %}
+		{# SHOULD NOT MERGE #}
+		{% if theme.privacy_policy_inline and object is null %} {# TRUE if the inline selection is NOT empty #}
+			{% for inline in theme.privacy_policy_inline if object is null %}
+					
+				{% if language == inline.language and inline.title and inline.content %} {# TRUE if the language matched #}
+					<div class="privacy-policy inline">
+						<div>
+							<input id="privacy_policy_checkbox" type="checkbox" class="privacy-policy">
+							<label for="privacy_policy_checkbox" class="checkbox"></label>
+						</div>
+						<div>{{ inline.title|regex_replace(regex, replacer) }}</div> {# wrap & highlight the term #}
+					</div>
+					{% set object = inline %}
+				{% endif %}
+
+			{% endfor %}
+		{% endif %}
+
+		<div class="fields">
+			<input type="text" class="name" placeholder="{{ theme.registration_texts_def.name }}" autocomplete="off">
+			<input type="email" class="email" placeholder="{{ data.email }}" autocomplete="off">
+			<button type="button" {{ object is null ? '' : 'disabled' }}>{{ data.button }}</button>
+		</div>
+	</section>
+
+	{% for key in ['progress', 'success', 'exists', 'error'] %}
+		<section class="notification {{ key }}">
+			{{ data['notification_' ~ key] }}
+		</section>
+	{% endfor %}
+{% endmacro %}
+
+
+{% set theme = config.theme %}
+{% if theme.registration_recipients %}
+	{% set notification = uri.query('registration') %}
+	{% set object = null %}
+	{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
+	{% set language = html_lang %}
+	
+	{% if notification %}
+		
+		{% for registration in theme.registration_texts if object is null %}
+			{% if language == registration.language %}
+				{{ _self.registration_response(notification, '', registration) }}
+				{% set object = registration %}
+			{% endif %}
+		{% endfor %}
+		{% if object is null %} {# default behaviour #}
+			{{ _self.registration_response(notification, theme.slug, theme.registration_texts_def) }}
+		{% endif %}
+
+	{% elseif theme.registration_texts %} {# TRUE if the inline selection is NOT empty #}
+
+		{% for registration in theme.registration_texts if object is null %}
+			{% if language == registration.language %}
+				{{ _self.registration_form('', theme, pages, registration) }}
+				{% set object = registration %}
+			{% endif %}
+		{% endfor %}
+		{% if object is null %} {# default behaviour #}
+			{{ _self.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
+		{% endif %}
+	{% else %}
+		{{ _self.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
+	{% endif %}
+{% endif %}

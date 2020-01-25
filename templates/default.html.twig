@@ -1,0 +1,55 @@
+{#
+	PM (15.12.2019) this script is used to describe the HTML document
+	@see https://learn.getgrav.org/16/themes
+#}
+{% extends 'partials/base.html.twig' %}
+
+{% block body %}
+	{% set object = null %}
+
+	{% if config.theme.home_page %} {# TRUE if the page selection is NOT empty #}
+		{# 
+			@see https://learn.getgrav.org/16/themes/theme-vars#pages-object
+			@see https://learn.getgrav.org/16/themes/theme-vars#route
+
+			{% if page.isPage and (
+				page.slug == config.theme.home_page or 
+				page.folder == config.theme.home_page or 
+				page.title|lower == config.theme.home_page|lower
+			) %}
+		#}
+		{% for page in pages.children if object is null %}
+			{% if page.isPage and page.route == config.theme.home_page %}
+				<section id="home" class="standalone">{{ page.content }}</section>
+				{% set object = page %}
+			{% endif %}
+		
+		{% endfor %}
+	{% endif %}
+	{# SHOULD NOT MERGE #}
+	{% if config.theme.home_inline and object is null %} {# TRUE if the inline selection is NOT empty #}
+		{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
+		{% set language = html_lang %}
+		<section id="home" class="inline">
+			{% for inline in config.theme.home_inline if object is null %}
+				
+				{% if language == inline.language and inline.content %} {# TRUE if the language matched #}
+					{% markdown %}{{ inline.content }}{% endmarkdown %}
+					{% set object = inline %}
+				{% endif %}
+
+			{% endfor %}
+		</section>
+	{% endif %}
+	
+	{% if object is null %} {# default behaviour #}
+		<section id="home" class="{{ config.theme.slug }}">
+			{% markdown %}
+				# {{ config.theme.acronym }}
+				A simple template for telling the world
+				- that you'll launch your next big thing soon or
+				- that your site is currently under maintenance.
+			{% endmarkdown %}
+		</section>
+	{% endif %}
+{% endblock %}

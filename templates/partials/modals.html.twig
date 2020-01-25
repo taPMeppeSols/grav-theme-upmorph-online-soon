@@ -1,0 +1,81 @@
+{# PM (22.01.2020) this script is used to generate all the modal containers #}
+
+{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
+{% set language = html_lang %}
+
+{# about us #}
+{% set object = null %}
+
+{% if config.theme.about_us_page %} {# TRUE if the page selection is NOT empty #}
+	{% for page in pages.children if object is null %}
+		
+		{% if page.isPage and page.route == config.theme.about_us_page and page.header.title and page.content %}
+			<div id="about_us" class="modal full standalone" data-target="about_us">
+				<h2>
+					<div>{{ page.header.title }}</div>
+					<div class="button" data-target="about_us">&times;</div>
+				</h2>
+				<div>{{ page.content }}</div>
+			</div>
+			{% set object = page %}
+		{% endif %}
+
+	{% endfor %}
+{% endif %}
+{# SHOULD NOT MERGE #}
+{% if config.theme.about_us_inline and object is null %} {# TRUE if the inline selection is NOT empty #}
+	{% for inline in config.theme.about_us_inline if object is null %}
+			
+		{% if language == inline.language and inline.title and inline.content %} {# TRUE if the language matched #}
+			<div id="about_us" class="modal full inline" data-target="about_us">
+				<h2>
+					<div>{{ inline.title }}</div>
+					<div class="button" data-target="about_us">&times;</div>
+				</h2>
+				<div>{% markdown %}{{ inline.content }}{% endmarkdown %}</div>
+			</div>
+			{% set object = inline %}
+		{% endif %}
+
+	{% endfor %}
+{% endif %}
+
+
+{# privacy policy #}
+{% set theme = config.theme %}
+{% set object = null %}
+{% set regex = '/(^[^\\[]*\\[|\\][^\\]]*$)/' %}
+
+{% if theme.privacy_policy_page %} {# TRUE if the page selection is NOT empty #}
+	{% for page in pages.children if object is null %}
+		
+		{% if page.isPage and page.route == theme.privacy_policy_page and page.header.title and page.content %}
+			<div id="privacy_policy" class="modal full standalone {{ uri.query('privacy-policy') ? 'active' : '' }}" data-target="privacy_policy">
+				<h2>
+					<div>{{ page.header.title|regex_replace(regex, '') }}</div> {# remove everything around the term #}
+					<div class="button" data-target="privacy_policy">&times;</div>
+				</h2>
+				<div>{{ page.content }}</div>
+			</div>
+			{% set object = page %}
+		{% endif %}
+
+	{% endfor %}
+{% endif %}
+{# SHOULD NOT MERGE #}
+{% if theme.privacy_policy_inline and object is null %} {# TRUE if the inline selection is NOT empty #}
+	{% for inline in theme.privacy_policy_inline if object is null %}
+			
+		{% if language == inline.language and inline.title and inline.content %} {# TRUE if the language matched #}
+			<div id="privacy_policy" class="modal full inline {{ uri.query('privacy-policy') ? 'active' : '' }}" data-target="privacy_policy">
+				<h2>
+					<div>{{ inline.title|regex_replace(regex, '') }}</div> {# remove everything around the term #}
+					<div class="button" data-target="privacy_policy">&times;</div>
+				</h2>
+				<div>{% markdown %}{{ inline.content }}{% endmarkdown %}</div>
+			</div>
+			{% set object = inline %}
+		{% endif %}
+
+	{% endfor %}
+{% endif %}

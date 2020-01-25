@@ -1,0 +1,59 @@
+{
+  "en": {
+    "subject_admin": "New email address",
+    "subject_visitor": "Signup confirmation",
+    "message_admin": [
+      "Hello __USERNAME__!",
+      "A new email address has been added to the mailing list: __EMAIL_ADDRESS__ .",
+      "",
+      "Greetings, <strong>__THEME__</strong>"
+    ],
+    "message_visitor": [
+      "Hello dear visitor",
+      "You have signed up on the website <a href='_URL_PAGE_'>_TITLE_</a>.",
+      "",
+      "To confirm, click or visit the following link: <a href='_URL_CONFIRMATION_'>_TITLE_: confirmation</a>.",
+      "<strong>If this was an error IGNORE this message.</strong>",
+      "",
+      "Greetings."
+    ]
+  },
+  "fr": {
+    "subject_admin": "Nouvelle adresse email",
+    "subject_visitor": "Confirmation d'inscription",
+    "message_admin": [
+      "Bonjour/Bonsoir __USERNAME__!",
+      "Une nouvelle adresse e-mail a été ajoutée à la liste de diffusion: __EMAIL_ADDRESS__ .",
+      "",
+      "Salutations, <strong>__THEME__</strong>"
+    ],
+    "message_visitor": [
+      "Bonjour/Bonsoir cher/chère visiteur!",
+      "Vous vous êtes inscrits sur le site <a href='_URL_PAGE_'>_TITLE_</a>.",
+      "",
+      "Pour confirmer, cliquez ou visitez le lien suivant: <a href='_URL_CONFIRMATION_'>_TITLE_: confirmation</a>.",
+      "<strong>Si c'était une erreur IGNOREZ ce message.</strong>",
+      "",
+      "Salutations."
+    ]
+  },
+  "de": {
+    "subject_admin": "Neu Email-Adresse",
+    "subject_visitor": "Anmeldebestätigung",
+    "message_admin": [
+      "Guten Tag __USERNAME__!",
+      "Eine neue Email-Adresse wurde zu der Mailingliste hinzugefügt: __EMAIL_ADDRESS__ .",
+      "",
+      "Viele Grüße, <strong>__THEME__</strong>"
+    ],
+    "message_visitor": [
+      "Guten Tag lieber/liebe Besucher/Besucherin!",
+      "Sie haben sich auf der Website <a href='_URL_PAGE_'>_TITLE_</a> angemeldet.",
+      "",
+      "Zum Bestätigen, klicken Sie auf oder besuchen Sie den folgenden Link: <a href='_URL_CONFIRMATION_'>_TITLE_: Bestätigung</a>.",
+      "<strong>Wenn dies ein Fehler war, IGNORIEREN Sie diese Meldung.</strong>",
+      "",
+      "Viele Grüße."
+    ]
+  }
+}

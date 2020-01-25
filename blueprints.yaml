@@ -1,0 +1,540 @@
+name: uPMORph online soon
+version: 2020.5
+description: uPMORph online soon should be used to <ul style="margin: 0 auto;padding-inline-start: 20px;"><li>either comfort the public until your kickass project/app/product/startup launches (online soon),</li><li>or set your site on maintenance (**back** online soon).</li><ul>
+icon: hourglass-half
+author:
+  name: taPMeppe solutions
+  email: development@tapmeppe.com
+  url: https://tapmeppe.solutions
+homepage: https://github.com/taPMeppeSols/grav-theme-upmorph-online-soon
+demo: https://tapmeppe.solutions
+keywords: grav, theme, tapmeppe, solution, eventually, maintenance, coming-soon, modern, responsive, newsletter, light, lightweight
+bugs: https://github.com/taPMeppeSols/grav-theme-upmorph-online-soon/issues
+docs: https://github.com/taPMeppeSols/grav-theme-upmorph-online-soon/blob/master/README.md
+license: MIT
+
+dependencies:
+  - {name: grav, version: '>=1.6.0'}
+  - {name: admin, version: '>=1.9.0'}
+  #- {name: admin-addon-user-manager, version: '>=2.2.1'}
+
+form:
+  validation: loose
+  fields:
+    head:
+      type: section
+      title: THEME_UPMORPH_ONSO.HEAD
+      underline: true
+
+    title.enabled:
+      type: toggle  
+      label: THEME_UPMORPH_ONSO.TITLE
+      description: THEME_UPMORPH_ONSO.TITLE_DESC
+      help: THEME_UPMORPH_ONSO.TITLE_HELP
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    
+    favicon:
+      type: file
+      label: THEME_UPMORPH_ONSO.FAVICON
+      description: THEME_UPMORPH_ONSO.FAVICON_DESC
+      help: THEME_UPMORPH_ONSO.FAVICON_HELP
+      size: medium
+      destination: 'image://upmorph-online-soon' #https://learn.getgrav.org/16/basics/folder-structure#user-images
+      multiple: false
+      markdown: true
+      accept:
+        - image/*
+    
+    logo:
+      type: file
+      label: THEME_UPMORPH_ONSO.LOGO
+      description: THEME_UPMORPH_ONSO.LOGO_DESC
+      help: THEME_UPMORPH_ONSO.LOGO_DESC
+      size: large
+      destination: 'image://upmorph-online-soon'
+      multiple: false
+      markdown: true
+      accept:
+        - image/*
+    
+    content:
+      type: section
+      title: THEME_UPMORPH_ONSO.CONTENT
+      underline: true
+    
+    slider:
+      type: file
+      label: THEME_UPMORPH_ONSO.SLIDER
+      description: THEME_UPMORPH_ONSO.SLIDER_DESC
+      help: THEME_UPMORPH_ONSO.SLIDER_HELP
+      size: large
+      destination: 'image://upmorph-online-soon'
+      multiple: true
+      markdown: true
+      accept:
+        - image/*
+    
+    home_tabs:
+      type: tabs
+      active: 1
+      fields:
+        home_tab_page:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_HOME
+          fields:
+            home_page: 
+              type: select
+              label: THEME_UPMORPH_ONSO.PAGE_HOME
+              description: THEME_UPMORPH_ONSO.PAGE_DESC
+              #help: THEME_UPMORPH_ONSO.PAGE_HELP
+              size: large
+              ignore_empty: true
+              data-options@: '\Grav\Theme\UpmorphOnlineSoon::pages'
+              data-default@: '\Grav\Plugin\Admin\Admin::getLastPageName'
+              options:
+                '-': THEME_UPMORPH_ONSO.SELECT
+              validate:
+                type: string
+        home_tab_inline:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_HOME_INLINE
+          fields:
+            home_inline:
+              type: list
+              label: THEME_UPMORPH_ONSO.PAGE_HOME_INLINE
+              #help: THEME_UPMORPH_ONSO.PAGE_HELP
+              size: large
+              array: true
+              validate:
+                type: array
+              fields:
+                .language:
+                  type: select
+                  size: small
+                  classes: fancy
+                  multiple: false
+                  ignore_empty: false
+                  label: THEME_UPMORPH_ONSO.PAGE_LANGUAGE
+                  help: THEME_UPMORPH_ONSO.PAGE_LANGUAGE_HELP
+                  data-options@: '\Grav\Plugin\Admin\Admin::siteLanguages'
+                  default: ''
+                  options:
+                    '': THEME_UPMORPH_ONSO.SELECT
+                  validate:
+                    type: string
+                .content:
+                  classes: frontmatter
+                  type: editor
+                  autofocus: true
+                  ignore_empty: false
+                  codemirror:
+                    mode: 'yaml'
+                    indentUnit: 4
+                    autofocus: true
+                    indentWithTabs: false
+                    lineNumbers: true
+                    styleActiveLine: true
+                    gutters: ['CodeMirror-lint-markers']
+                    lint: true
+
+    about_us_tabs:
+      type: tabs
+      active: 1
+      fields:
+        about_us_tab_page:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_ABOUT_US
+          fields:
+            about_us_page: 
+              type: select
+              label: THEME_UPMORPH_ONSO.PAGE_ABOUT_US
+              description: THEME_UPMORPH_ONSO.PAGE_DESC
+              #help: THEME_UPMORPH_ONSO.PAGE_HELP
+              size: large
+              ignore_empty: true
+              data-options@: '\Grav\Theme\UpmorphOnlineSoon::pages'
+              data-default@: '\Grav\Plugin\Admin\Admin::getLastPageName'
+              options:
+                '-': THEME_UPMORPH_ONSO.SELECT
+              validate:
+                type: string
+        about_us_tab_inline:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_ABOUT_US_INLINE
+          fields:
+            about_us_inline:
+              type: list
+              label: THEME_UPMORPH_ONSO.PAGE_ABOUT_US_INLINE
+              #help: THEME_UPMORPH_ONSO.PAGE_HELP
+              size: large
+              array: true
+              validate:
+                type: array
+              fields:
+                .language:
+                  type: select
+                  size: small
+                  classes: fancy
+                  multiple: false
+                  ignore_empty: false
+                  label: THEME_UPMORPH_ONSO.PAGE_LANGUAGE
+                  help: THEME_UPMORPH_ONSO.PAGE_LANGUAGE_HELP
+                  data-options@: '\Grav\Plugin\Admin\Admin::siteLanguages'
+                  default: ''
+                  options:
+                    '': THEME_UPMORPH_ONSO.SELECT
+                  validate:
+                    type: string
+                .title:
+                  type: text
+                  label: THEME_UPMORPH_ONSO.PAGE_TITLE
+                  help: THEME_UPMORPH_ONSO.PAGE_ABOUT_US_INLINE_TITLE_HELP
+                  size: medium
+                  placeholder: About us
+                  ignore_empty: false
+                  default: ''
+                  # required: true
+                  validate:
+                    type: string
+                .content:
+                  classes: frontmatter
+                  type: editor
+                  autofocus: true
+                  ignore_empty: false
+                  codemirror:
+                    mode: 'yaml'
+                    indentUnit: 4
+                    autofocus: true
+                    indentWithTabs: false
+                    lineNumbers: true
+                    styleActiveLine: true
+                    gutters: ['CodeMirror-lint-markers']
+                    lint: true
+
+    privacy_policy_tabs:
+      type: tabs
+      active: 1
+      fields:
+        privacy_policy_tab_page:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY
+          fields:
+            privacy_policy_page: 
+              type: select
+              label: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY
+              description: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY_DESC
+              help: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY_HELP
+              size: large
+              ignore_empty: true
+              data-options@: '\Grav\Theme\UpmorphOnlineSoon::pages'
+              data-default@: '\Grav\Plugin\Admin\Admin::getLastPageName'
+              options:
+                '-': THEME_UPMORPH_ONSO.SELECT
+              validate:
+                type: string
+        privacy_policy_tab_inline:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY_INLINE
+          fields:
+            privacy_policy_inline:
+              type: list
+              label: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY_INLINE
+              help: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY_HELP
+              size: large
+              array: true
+              validate:
+                type: array
+              fields:
+                .language:
+                  type: select
+                  size: small
+                  classes: fancy
+                  multiple: false
+                  ignore_empty: false
+                  label: THEME_UPMORPH_ONSO.PAGE_LANGUAGE
+                  help: THEME_UPMORPH_ONSO.PAGE_LANGUAGE_HELP
+                  data-options@: '\Grav\Plugin\Admin\Admin::siteLanguages'
+                  default: ''
+                  options:
+                    '': THEME_UPMORPH_ONSO.SELECT
+                  validate:
+                    type: string
+                .title:
+                  type: text
+                  label: THEME_UPMORPH_ONSO.PAGE_TITLE
+                  help: THEME_UPMORPH_ONSO.PAGE_PRIVACY_POLICY_INLINE_HELP
+                  size: large
+                  placeholder: Privacy policy
+                  ignore_empty: false
+                  default: ''
+                  # required: true
+                  validate:
+                    type: string
+                .content:
+                  classes: frontmatter
+                  type: editor
+                  autofocus: true
+                  ignore_empty: false
+                  codemirror:
+                    mode: 'yaml'
+                    indentUnit: 4
+                    autofocus: true
+                    indentWithTabs: false
+                    lineNumbers: true
+                    styleActiveLine: true
+                    gutters: ['CodeMirror-lint-markers']
+                    lint: true
+
+    registration:
+      type: section
+      title: THEME_UPMORPH_ONSO.REGISTRATION
+      underline: true
+
+    registration_recipients:
+      type: list
+      label: THEME_UPMORPH_ONSO.REGISTRATION_RECIPIENTS
+      help: THEME_UPMORPH_ONSO.REGISTRATION_RECIPIENTS_HELP
+      size: large
+      sort: false
+      array: true
+      validate:
+        type: array
+      fields:
+        .recipient:
+          type: select
+          label: THEME_UPMORPH_ONSO.REGISTRATION_RECIPIENT
+          size: large
+          ignore_empty: false
+          data-options@: '\Grav\Theme\UpmorphOnlineSoon::recipients'
+          default: ''
+          options:
+            '': THEME_UPMORPH_ONSO.SELECT
+          validate:
+            type: string
+
+    registration_texts:
+      type: list
+      label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS
+      help: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_HELP
+      size: large
+      sort: false
+      collapsed: false
+      array: true
+      validate:
+        type: array
+      fields:
+        .language:
+          type: select
+          size: small
+          classes: fancy
+          multiple: false
+          ignore_empty: false
+          label: THEME_UPMORPH_ONSO.PAGE_LANGUAGE
+          help: THEME_UPMORPH_ONSO.PAGE_LANGUAGE_HELP
+          data-options@: '\Grav\Plugin\Admin\Admin::siteLanguages'
+          default: ''
+          options:
+            '': THEME_UPMORPH_ONSO.SELECT
+        .email:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_EMAIL
+          size: medium
+          placeholder: Email address
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .button:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_BUTTON
+          size: small
+          placeholder: Register
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .notification_progress:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_NOTIFICATION_PROGRESS
+          size: medium
+          placeholder: In progress ...
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .notification_success:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_NOTIFICATION_SUCCESS
+          size: medium
+          placeholder: Success! Check your inbox.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .notification_exists:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_NOTIFICATION_EXISTS
+          size: medium
+          placeholder: This email has already been registered.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .notification_error:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_NOTIFICATION_ERROR
+          size: medium
+          placeholder: Error! Something went wrong.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .response_success:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_RESPONSE_SUCCESS
+          size: large
+          placeholder: The registration was successful.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .response_exists:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_RESPONSE_EXISTS
+          size: large
+          placeholder: This email has already been registered.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .response_error:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_RESPONSE_ERROR
+          size: large
+          placeholder: The registration has failed.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+
+    social_networks:
+      type: section
+      title: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS
+      underline: true
+    social_networks_tabs:
+      type: tabs
+      active: 1
+      fields:
+        social_networks_urls:
+          type: tab
+          title: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS
+          fields:
+            social_networks.urls_facebook:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_FACEBOOK
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://facebook.com/
+              default: https://facebook.com/
+              validate:
+                type: url
+            social_networks.urls_github:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_GITHUB
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://github.com/
+              default: https://github.com/
+              validate:
+                type: url
+            social_networks.urls_instagram:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_INSTAGRAM
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://instagram.com/
+              default: https://instagram.com/
+              validate:
+                type: url
+            social_networks.urls_linkedin:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_LINKEDIN
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://linkedin.com/
+              default: https://linkedin.com/
+              validate:
+                type: url
+            social_networks.urls_tumblr:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_TUMBLR
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://tumblr.com/
+              default: https://tumblr.com/
+              validate:
+                type: url
+            social_networks.urls_twitter:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_TWITTER
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://twitter.com/
+              default: https://twitter.com/
+              validate:
+                type: url
+            social_networks.urls_whatsapp:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_WHATSAPP
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://web.whatsapp.com/
+              default: https://web.whatsapp.com/
+              validate:
+                type: url
+            social_networks.urls_xing:
+              type: url
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_XING
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_DESC
+              size: large
+              placeholder: https://xing.com/
+              default: https://xing.com/
+              validate:
+                type: url
+        social_networks_order:
+          type: tab
+          title: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_ORDER
+          fields:
+            social_networks.order:
+              type: list
+              label: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_ORDER
+              help: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_ORDER_HELP
+              default: ''
+              size: large
+              array: true
+              validate:
+                type: array
+              fields:
+                .target:
+                  type: select
+                  size: small
+                  classes: fancy
+                  multiple: false
+                  label: THEME_UPMORPH_ONSO.SOCIAL_NETWORK
+                  options:
+                    '': THEME_UPMORPH_ONSO.SELECT
+                    facebook: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_FACEBOOK
+                    github: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_GITHUB
+                    instagram: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_INSTAGRAM
+                    linkedin: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_LINKEDIN
+                    tumblr: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_TUMBLR
+                    twitter: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_TWITTER
+                    whatsapp: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_WHATSAPP
+                    xing: THEME_UPMORPH_ONSO.SOCIAL_NETWORKS_URLS_XING
+    

@@ -1,0 +1,25 @@
+enabled: true
+
+slug: upmorph
+acronym: uPMORph
+
+title:
+  enabled: true
+registration_texts_def:
+  button: Register
+  email: Email address
+  name: Name #DO NOT REMOVE it is part of the honey pot
+  notification_error: Error! Something went wrong.
+  notification_exists: This email address has already been registered.
+  notification_progress: In progress ...
+  notification_success: Success! Check your inbox.
+  response_error: The registration has failed.
+  response_exists: This email address has already been registered.
+  response_success: The registration was successful.
+social_networks:
+  urls_facebook: https://facebook.com/
+  urls_instagram: https://instagram.com/
+  urls_twitter: https://twitter.com/
+
+notification:
+  success: THEME_UPMORPH_ONSO.REGISTRATION_RECIPIENT

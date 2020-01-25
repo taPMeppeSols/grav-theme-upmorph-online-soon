@@ -1,0 +1,55 @@
+<section>
+	<a class="logo" href="{{ home_url }}">
+		{% if config.theme.logo %}
+			{# @see https://twig.symfony.com/doc/3.x/tags/for.html#iterating-over-keys #}
+			{% for logo in config.theme.logo %} {# one round #}
+				<img src="{{ logo.path }}" alt="{{ config.site.title }} :: LOGO">
+			{% endfor %}
+		{% else %}
+			<img class="{{ config.theme.slug }}" src="{{ url('theme://images/logo.png') }}" alt="{{ config.site.title }} :: LOGO">
+		{% endif %}
+	</a>
+</section>
+<nav>
+	{% set object = null %}
+	{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
+	{% set language = html_lang %}
+
+	{% if config.theme.about_us_page %} {# TRUE if the page selection is NOT empty #}
+		{% for page in pages.children if object is null %}
+			
+			{% if page.isPage and page.route == config.theme.about_us_page and page.header.title and page.content %}
+				<div class="standalone">
+					<button data-target="about_us">{{ page.header.title }}</button>
+				</div>
+				{% set object = page %}
+			{% endif %}
+
+		{% endfor %}
+	{% endif %}
+	{# SHOULD NOT MERGE #}
+	{% if config.theme.about_us_inline and object is null %} {# TRUE if the inline selection is NOT empty #}
+		{% for inline in config.theme.about_us_inline if object is null %}
+				
+			{% if language == inline.language and inline.title and inline.content %} {# TRUE if the language matched #}
+				<div class="inline">
+					<button data-target="about_us">{{ inline.title }}</button>
+				</div>
+				{% set object = inline %}
+			{% endif %}
+
+		{% endfor %}
+	{% endif %}
+
+	{# language selector #}
+	{% if system.languages.supported|length > 1 %}
+		<div>
+			<button class="button languages dropdown" data-target="languages">{{ language }}</button>
+			<div id="languages" class="modal languages">
+				{% for lang in system.languages.supported if language != lang %}
+					<a class="button" href="/{{ lang }}">{{ lang }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+</nav>
