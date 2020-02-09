@@ -9,13 +9,26 @@
 {# {% import _self as macros %} #}
 
 {% macro registration_response(response, class, data) %}
-	{% if response == 'success' or response == 'exists' %}
-		<section class="notification active {{ response }} {{ class }}">
-			{{ data['response_' ~ response] }}
+	{% set type = null %} {# the response type: success, error, ... #}
+	{% set prefix = null %}
+	
+	{% if response|starts_with('deletion') %}
+		{% set type = regex_replace(response, '/^deletion[_-]/', '') %}
+		{% set prefix = 'deletion_' %}
+	{% else %}
+		{% set type = response %}
+		{% set prefix = 'response_' %}
+	{% endif %}
+	
+
+	{% if type == 'error' %}
+		<section class="notification active error {{ class }}">
+			{{ data[prefix ~ 'error'] }}
 		</section>
 	{% else %}
-		<section class="notification active error {{ class }}">
-			{{ data.response_error }}
+		<section class="notification active {{ type }} {{ class }}">
+			{% set type = regex_replace(type, '/-/', '_') %}
+			{{ data[ prefix ~ type ] }}
 		</section>
 	{% endif %}
 {% endmacro %}
@@ -24,7 +37,7 @@
 	<section id="registration" class="{{ class }}">
 		{% set object = null %}
 		{% set regex = '/\\[([^\\[\\]]+)\\]/' %}
-		{% set replacer = '<span class="button" data-target="privacy_policy">$1</span>' %}
+		{% set replacer = '<span class="button button-underline" data-target="privacy_policy">$1</span>' %}
 
 		{% if theme.privacy_policy_page %} {# TRUE if the page selection is NOT empty #}
 			{% for page in pages.children if object is null %}

@@ -20,6 +20,7 @@
 
 //#### ATTRIBUTES #####
 @color_bg: #2B2B2B;
+@color_bg_transp: rgba(@color_bg, .80);
 @color_font: #A9B7C6;
 @color_green: #317f43;
 @color_yellow: #ff9800;
@@ -102,6 +103,15 @@ body {
 	position: relative;
 	z-index: 5;
 
+	&.incognito { //PM (07.02.2020) used to work in public without anyone noticing that I'm working on my own project :-)
+		aside#slider,
+		header a.logo 
+		{
+			visibility: hidden!important;
+			opacity: 0!important;
+		}
+	}
+
 	h1, h2, h3, h4, h5, h6, p, ul //override the native behaviour
 	{
 		margin-top: 0;
@@ -132,9 +142,14 @@ body {
 		padding: @dim_pt;
 		.fct_transition(@duration, all);
 		.fct_pointer;
-		white-space: nowrap
+		white-space: nowrap;
+
+		&.button-underline:hover { text-decoration: underline }
 	}
 	//*[data-target]{ display: block }
+
+	.capital { text-transform: capitalize }
+
 
 	aside#slider {
 		opacity: .375;
@@ -471,18 +486,21 @@ body {
 				}
 				&.notification {
 					padding: @dim;
-					border-left: solid @dim;
+					border-left: solid @dim @color_yellow; /* @since 2020.7 PM (07.02.2020) th yellow/warning state is now the default state */
+					color: @color_yellow;
 					font-weight: bold;
-					background: rgba(@color_bg, .75);
+					background: @color_bg_transp;
 		
 					&:not(.active){ .fct_hide }
+					/* #alternative
+					&:not(.success):not(.error){
+						border-left-color: @color_yellow;
+						color: @color_yellow
+					}
+					*/
 					&.success {
 						border-left-color: @color_green;
 						color: @color_green
-					}
-					&.exists {
-						border-left-color: @color_yellow;
-						color: @color_yellow
 					}
 					&.error {
 						border-left-color: @color_red;
@@ -492,7 +510,7 @@ body {
 			}
 		}
 		footer {
-			@dim_li_padding: .25em;
+			@dim_li_padding: @dim_2/2;
 
 			color: rgba(@color_font, 0.5);
 			
@@ -509,17 +527,21 @@ body {
 				padding-left: 0;
 				margin: 0 -@dim_li_padding;
 
-				&.icons > li {
+				&.socials > li {
 					.fct_transition(@duration);
 					
 					@media screen and (min-width: @dim_vp_large_min){
 						&:not(:hover) { opacity: .5 }
 					}
 				}
-				&.copyright { margin-bottom: 0; }
+				&.legal { 
+					margin-bottom: @dim; 
+					
+					> li { padding: 0 }
+				}
 				> li {
 					display: inline-block;
-					margin: 0 @dim_li_padding @dim_li_padding*2 @dim_li_padding;
+					margin: @dim_li_padding*2 @dim_li_padding;
 
 					a { 
 						padding: @dim_li_padding*2;
@@ -549,7 +571,7 @@ body {
 			width: ~"calc(100% - @{dim_pt} * 2)";
 			height: ~"calc(100% - @{dim_pt} * 2)";
 			padding: @dim_pt;
-			background: rgba(@color_bg, .75);
+			background: @color_bg_transp;
 			overflow: auto;
 
 			> * {
@@ -558,7 +580,6 @@ body {
 			}
 			> h2 {
 				display: flex;
-				text-transform: capitalize;
 				margin: .5em auto;
 
 				@media screen and (max-width: @dim_vp_small_max){ font-size: 2.25em }

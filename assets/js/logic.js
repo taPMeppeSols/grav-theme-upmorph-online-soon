@@ -59,7 +59,11 @@ const UPMORPH_ACTIVE = 'active';
 			const elt = event.target
 			if(elt.matches('[data-target]')){
 				const target = body.querySelector('#'+ elt.getAttribute('data-target'))
-				if(target) target.classList.toggle(UPMORPH_ACTIVE) //add or remove
+				if(target){
+					//target.scrollTop = 0 //PM (08.02.2020) for the time being turn it off
+					//target.scrollTo(0, 0) //scroll to the top -> doesn't work in EDGE
+					target.classList.toggle(UPMORPH_ACTIVE) //add or remove
+				}
 			}
 		}
 	)
@@ -122,7 +126,7 @@ const UPMORPH_ACTIVE = 'active';
 										if(this.responseText == 'success') address.value = '';
 										document.querySelector(notif + this.responseText).classList.add(UPMORPH_ACTIVE)
 	
-										console.log(this.responseText)
+										if(UPMORPH.dev) console.log(this.responseText)
 									}else document.querySelector(notif +'error').classList.add(UPMORPH_ACTIVE)
 	
 									//re-enable the form elements
@@ -133,16 +137,13 @@ const UPMORPH_ACTIVE = 'active';
 							
 							const data = new FormData()
 							data.append(
-								UPMORPH.slug +'_auth_code', 
+								UPMORPH.auth, 
 								btoa(
 									btoa(location.href.replace(regex, '#')).replace(regex, '@')
 								).replace(regex, '')
 							)
 							data.append('name', form.querySelector('input.name').value) //no trim on purpose
 							data.append('email', email)
-							data.append('lang', UPMORPH.lang)
-							data.append('qwertzuiop', UPMORPH.qwertzuiop)
-							data.append('title', atob(UPMORPH.title))
 							http.send(data)
 						}else address.focus()
 					}

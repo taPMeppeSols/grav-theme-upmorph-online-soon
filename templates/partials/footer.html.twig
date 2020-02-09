@@ -7,7 +7,7 @@
 #}
 
 {% if config.theme.social_networks.order %} {# TRUE if the order has been manually set by the administrator #}
-	<ul class="icons custom">
+	<ul class="socials custom">
 		{% for data in config.theme.social_networks.order %}
 			{% set network = data.target %}
 			{% set url = config.theme.social_networks["urls_" ~ network] %}
@@ -22,7 +22,42 @@
 		{% endfor %}
 	</ul>
 {% endif %}
-<ul class="copyright">
-	<li>&copy; {{ now | date("Y") }}</li>
-	<li>{{ site.title }}</li>
+
+
+{% set theme = config.theme %}
+{% set regex = '/(^[^\\[]*\\[|\\][^\\]]*$)/' %}
+{% macro legal(id, theme, pages, language, regex = '') %}
+	{% set object = null %}
+	
+	{% if theme[id ~'_page'] %} {# TRUE if the page selection is NOT empty #}
+		{% for page in pages.children if object is null %}
+			
+			{% if page.isPage and page.route == theme[id ~'_page'] and page.header.title and page.content %}
+				<li class="button button-underline capital standalone" data-target="{{ id }}">{{ regex == '' ? page.header.title : page.header.title|regex_replace(regex, '') }}</li> {# remove everything around the term #}
+				{% set object = page %}
+			{% endif %}
+
+		{% endfor %}
+	{% endif %}
+	{# SHOULD NOT MERGE #}
+	{% if theme[id ~'_inline'] and object is null %} {# TRUE if the inline selection is NOT empty #}
+		{% for inline in theme[id ~'_inline'] if object is null %}
+				
+			{% if language == inline.language and inline.title and inline.content %} {# TRUE if the language matched #}
+				<li class="button button-underline capital inline" data-target="{{ id }}">{{ regex == '' ? inline.title : inline.title|regex_replace(regex, '') }}</li> {# remove everything around the term #}
+				{% set object = inline %}
+			{% endif %}
+
+		{% endfor %}
+	{% endif %}
+{% endmacro %}
+
+<ul class="legal">
+	{# privacy policy & imprint @version 2020.7 @since PM (07.02.2020) #}
+	{% set theme = config.theme %}
+	{% set language = html_lang %}
+	{{ _self.legal('privacy_policy', theme, pages, language, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
+	{{ _self.legal('imprint', theme, pages, language) }} {# imprint #}
+
+	<li>&copy; {{ now | date("Y") }} {{ site.title }}</li>
 </ul>

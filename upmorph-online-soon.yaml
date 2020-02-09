@@ -13,9 +13,12 @@ registration_texts_def:
   notification_exists: This email address has already been registered.
   notification_progress: In progress ...
   notification_success: Success! Check your inbox.
-  response_error: The registration has failed.
+  response_error: Error! The registration has failed.
   response_exists: This email address has already been registered.
   response_success: The registration was successful.
+  deletion_error: Error! The email couldn't be removed from the mailing list.
+  deletion_not_found: The email could not be found in the mailing list.
+  deletion_success: The email has been successfully removed from the mailing list.
 social_networks:
   urls_facebook: https://facebook.com/
   urls_instagram: https://instagram.com/

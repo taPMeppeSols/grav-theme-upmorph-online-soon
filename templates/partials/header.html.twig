@@ -6,7 +6,7 @@
 				<img src="{{ logo.path }}" alt="{{ config.site.title }} :: LOGO">
 			{% endfor %}
 		{% else %}
-			<img class="{{ config.theme.slug }}" src="{{ url('theme://images/logo.png') }}" alt="{{ config.site.title }} :: LOGO">
+			<img class="{{ upmorph_slug ?: config.theme.slug }}" src="{{ url('theme://images/logo.png') }}" alt="{{ config.site.title }} :: LOGO">
 		{% endif %}
 	</a>
 </section>

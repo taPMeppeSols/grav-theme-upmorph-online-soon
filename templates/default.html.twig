@@ -43,7 +43,7 @@
 	{% endif %}
 	
 	{% if object is null %} {# default behaviour #}
-		<section id="home" class="{{ config.theme.slug }}">
+		<section id="home" class="{{ upmorph_slug ?: config.theme.slug }}">
 			{% markdown %}
 				# {{ config.theme.acronym }}
 				A simple template for telling the world

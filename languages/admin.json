@@ -1,0 +1,104 @@
+{
+  "en": {
+    "subject_admin_registration": "New email address",
+    "subject_admin_deletion": "Email address deletion",
+    "subject_admin_deletion_error": "Email address deletion :: ERROR!",
+    "subject_visitor": "Signup confirmation",
+    "message_admin_registration": [
+      "Hello __USERNAME__!",
+      "A new email address has been added to the mailing list: <em>__EMAIL_ADDRESS__</em> .",
+      "",
+      "Greetings, <strong>__TITLE__</strong>."
+    ],
+    "message_admin_deletion": [
+      "Hello __USERNAME__!",
+      "An email address has been <strong>deleted</strong> from the mailing list: <em>__EMAIL_ADDRESS__</em> .",
+      "",
+      "Greetings, <strong>__TITLE__</strong>."
+    ],
+    "message_admin_deletion_error": [
+      "Hello __USERNAME__!",
+      "The <strong>deletion</strong> request for the email address <em>__EMAIL_ADDRESS__</em> could not be executed successfully.",
+      "You will have to delete it manually and inform the visitor at his address: <a href='mailto:__EMAIL_ADDRESS__?subject=__TITLE__%20::%20Email address deletion'>__EMAIL_ADDRESS__</a> .",
+      "",
+      "Greetings, <strong>__TITLE__</strong>."
+    ],
+    "message_visitor": [
+      "Hello dear visitor",
+      "You have signed up on the website <a href='__URL_PAGE__'>__TITLE__</a>.",
+      "",
+      "To confirm, click or visit the following link: <a href='__URL_CONFIRMATION__'>__TITLE__: confirmation</a>.",
+      "<strong>If this was an error IGNORE this message.</strong>",
+      "",
+      "Greetings, <strong>__TITLE__</strong>."
+    ]
+  },
+  "fr": {
+    "subject_admin_registration": "Nouvelle adresse e-mail",
+    "subject_admin_deletion": "Suppression de l'adresse e-mail",
+    "subject_admin_deletion_error": "Suppression de l'adresse e-mail :: ERREUR!",
+    "subject_visitor": "Confirmation d'inscription",
+    "message_admin_registration": [
+      "Bonjour/Bonsoir __USERNAME__!",
+      "Une nouvelle adresse e-mail a été ajoutée à la liste de diffusion: <em>__EMAIL_ADDRESS__</em> .",
+      "",
+      "Salutations, <strong>__TITLE__</strong>."
+    ],
+    "message_admin_deletion": [
+      "Bonjour/Bonsoir __USERNAME__!",
+      "Une adresse e-mail a été <strong>retirée</strong> de la liste de diffusion: <em>__EMAIL_ADDRESS__</em> .",
+      "",
+      "Salutations, <strong>__TITLE__</strong>."
+    ],
+    "message_admin_deletion_error": [
+      "Bonjour/Bonsoir __USERNAME__!",
+      "La requête de <strong>suppression</strong> faite pour l'adresse e-mail <em>__EMAIL_ADDRESS__</em> na pas pu être effectuée avec succès.",
+      "Vous devrez la supprimer manuellement et informer le visiteur à son adresse: <a href='mailto:__EMAIL_ADDRESS__?subject=__TITLE__%20::%20Email address deletion'>__EMAIL_ADDRESS__</a> .",
+      "",
+      "Salutations, <strong>__TITLE__</strong>."
+    ],
+    "message_visitor": [
+      "Bonjour/Bonsoir cher/chère visiteur!",
+      "Vous vous êtes inscrits sur le site <a href='__URL_PAGE__'>__TITLE__</a>.",
+      "",
+      "Pour confirmer, cliquez ou visitez le lien suivant: <a href='__URL_CONFIRMATION__'>__TITLE__: confirmation</a>.",
+      "<strong>Si c'était une erreur IGNOREZ ce message.</strong>",
+      "",
+      "Salutations, <strong>__TITLE__</strong>."
+    ]
+  },
+  "de": {
+    "subject_admin_registration": "Neu E-Mail-Adresse",
+    "subject_admin_deletion": "Entfernung einer E-Mail-Adresse",
+    "subject_admin_deletion_error": "Entfernung einer E-Mail-Adresse :: FEHLER!",
+    "subject_visitor": "Anmeldebestätigung",
+    "message_admin_registration": [
+      "Guten Tag __USERNAME__!",
+      "Eine neue Email-Adresse wurde zu der Mailingliste hinzugefügt: <em>__EMAIL_ADDRESS__</em> .",
+      "",
+      "Viele Grüße, <strong>__TITLE__</strong>."
+    ],
+    "message_admin_deletion": [
+      "Guten Tag __USERNAME__!",
+      "Eine Email-Adresse wurde von der Mailingliste <strong>entfernt</strong>: <em>__EMAIL_ADDRESS__</em> .",
+      "",
+      "Viele Grüße, <strong>__TITLE__</strong>."
+    ],
+    "message_admin_deletion_error": [
+      "Guten Tag __USERNAME__!",
+      "Die <strong>Löschanforderung</strong> für die E-Mail-Adresse <em>__EMAIL_ADDRESS__</em> konnte nicht erfolgreich ausgeführt werden.",
+      "Sie müssen diese manuell löschen und den Besucher unter seiner Adresse informieren: <a href='mailto:__EMAIL_ADDRESS__?subject=__TITLE__%20::%20Email address deletion'>__EMAIL_ADDRESS__</a> .",
+      "",
+      "Viele Grüße, <strong>__TITLE__</strong>."
+    ],
+    "message_visitor": [
+      "Guten Tag lieber/liebe Besucher/Besucherin!",
+      "Sie haben sich auf der Website <a href='__URL_PAGE__'>__TITLE__</a> angemeldet.",
+      "",
+      "Zum Bestätigen, klicken Sie auf oder besuchen Sie den folgenden Link: <a href='__URL_CONFIRMATION__'>__TITLE__: Bestätigung</a>.",
+      "<strong>Wenn dies ein Fehler war, IGNORIEREN Sie diese Meldung.</strong>",
+      "",
+      "Viele Grüße, <strong>__TITLE__</strong>."
+    ]
+  }
+}

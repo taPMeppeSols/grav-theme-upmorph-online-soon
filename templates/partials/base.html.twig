@@ -44,7 +44,7 @@
 			{{ assets.js()|raw }}
 		{% endblock %}
 	</head>
-	<body id="top" class="is-preload {{ page.header.body_classes }}">
+	<body id="top" class="is-preload {{ page.header.body_classes }}"> {# incognito #}
 		<aside id="slider">
 			{% block background %}
 				{% include 'partials/slider.html.twig' %}
@@ -74,22 +74,32 @@
 				PM (15.12.2019) used in main.js to adapt main.js to GRAV 
 				<script>const UPMORPH_THEME_URL = '{{ theme_url }}/{{ theme_dir|basename }}.php';</script>
 			#}
+			{# @version 2020.7 @since PM (08.02.2020) @deprecated
 			{% set recipients = [] %}
 			{% for recipient in config.theme.registration_recipients %}
 				{% set recipients = recipients|merge([recipient.recipient]) %}
 			{% endfor %}
+			<script>
+				const UPMORPH = {
+					slug: '{{ upmorph_slug ?: config.theme.slug }}',
+					lang: '{{ html_lang }}',
+					//lang: '{{ grav.language.getActive ?: grav.config.site.default_lang }}',
+					qwertzuiop: '{{ recipients|json_encode|base64_encode|base64_encode }}',
+					title: '{{ site.title|base64_encode }}'
+				};
+			</script>
+			#}
 			{#
 				<pre>{{ config.theme.registration_recipients|print_r }}</pre>
 				<pre>{{ config.theme.registration_recipients|json_encode }}</pre>
 				<pre>{{ recipients|print_r }}</pre>
 			#}
+			
 			<script>
 				const UPMORPH = {
-					slug: '{{ config.theme.slug }}',
-					lang: '{{ html_lang }}',
-					//lang: '{{ grav.language.getActive ?: grav.config.site.default_lang }}',
-					qwertzuiop: '{{ recipients|json_encode|base64_encode|base64_encode }}',
-					title: '{{ site.title|base64_encode }}'
+					slug: '{{ upmorph_slug ?: config.theme.slug }}',
+					dev: '{{ upmorph_dev }}' == '1',
+					auth: '{{ upmorph_auth }}',
 				};
 			</script>
 			{{ assets.js('bottom')|raw }}

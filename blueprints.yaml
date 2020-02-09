@@ -1,5 +1,5 @@
 name: uPMORph online soon
-version: 2020.6
+version: 2020.9
 description: uPMORph online soon should be used to <ul style="margin: 0 auto;padding-inline-start: 20px;"><li>either comfort the public until your kickass project/app/product/startup launches (online soon),</li><li>or set your site on maintenance (**back** online soon).</li><ul>
 icon: hourglass-half
 author:
@@ -291,6 +291,78 @@ form:
                     gutters: ['CodeMirror-lint-markers']
                     lint: true
 
+    imprint_tabs:
+      type: tabs
+      active: 1
+      fields:
+        imprint_tab_page:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_IMPRINT
+          fields:
+            imprint_page: 
+              type: select
+              label: THEME_UPMORPH_ONSO.PAGE_IMPRINT
+              size: large
+              ignore_empty: true
+              data-options@: '\Grav\Theme\UpmorphOnlineSoon::pages'
+              data-default@: '\Grav\Plugin\Admin\Admin::getLastPageName'
+              options:
+                '-': THEME_UPMORPH_ONSO.SELECT
+              validate:
+                type: string
+        imprint_tab_inline:
+          type: tab
+          title: THEME_UPMORPH_ONSO.PAGE_IMPRINT_INLINE
+          fields:
+            imprint_inline:
+              type: list
+              label: THEME_UPMORPH_ONSO.PAGE_IMPRINT_INLINE
+              size: large
+              array: true
+              validate:
+                type: array
+              fields:
+                .language:
+                  type: select
+                  size: small
+                  classes: fancy
+                  multiple: false
+                  ignore_empty: false
+                  label: THEME_UPMORPH_ONSO.PAGE_LANGUAGE
+                  help: THEME_UPMORPH_ONSO.PAGE_LANGUAGE_HELP
+                  data-options@: '\Grav\Plugin\Admin\Admin::siteLanguages'
+                  default: ''
+                  options:
+                    '': THEME_UPMORPH_ONSO.SELECT
+                  validate:
+                    type: string
+                .title:
+                  type: text
+                  label: THEME_UPMORPH_ONSO.PAGE_TITLE
+                  help: THEME_UPMORPH_ONSO.PAGE_IMPRINT_INLINE_HELP
+                  size: large
+                  placeholder: Privacy policy
+                  ignore_empty: false
+                  default: ''
+                  # required: true
+                  validate:
+                    type: string
+                .content:
+                  classes: frontmatter
+                  type: editor
+                  autofocus: true
+                  ignore_empty: false
+                  codemirror:
+                    mode: 'yaml'
+                    indentUnit: 4
+                    autofocus: true
+                    indentWithTabs: false
+                    lineNumbers: true
+                    styleActiveLine: true
+                    gutters: ['CodeMirror-lint-markers']
+                    lint: true
+      
+                    
     registration:
       type: section
       title: THEME_UPMORPH_ONSO.REGISTRATION
@@ -324,7 +396,7 @@ form:
       help: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_HELP
       size: large
       sort: false
-      collapsed: false
+      collapsed: true
       array: true
       validate:
         type: array
@@ -417,7 +489,34 @@ form:
           type: text
           label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_RESPONSE_ERROR
           size: large
-          placeholder: The registration has failed.
+          placeholder: Error! The registration has failed.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .deletion_success:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_UNDO_SUCCESS
+          size: large
+          placeholder: The email has been successfully removed from the mailing list.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .deletion_not_found:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_UNDO_NOT_FOUND
+          size: large
+          placeholder: The email could not be found in the mailing list.
+          ignore_empty: false
+          default: ''
+          validate:
+            type: string
+        .deletion_error:
+          type: text
+          label: THEME_UPMORPH_ONSO.REGISTRATION_TEXTS_UNDO_ERROR
+          size: large
+          placeholder: Error! The email couldn't be removed from the mailing list.
           ignore_empty: false
           default: ''
           validate:
