@@ -22,7 +22,7 @@
 			admin = 'admin', success = 'success', error = 'error', email = 'email', alias = 'alias',
 			errors = self::error .'s', emails = self::email .'s', aliases = self::alias .'es'
 		;
-		private static $dev, $theme, $dir, $slug, $auth, $recipients = [], $routes = [];
+		private static $dev, $locator, $thm, $theme, $dir, $slug, $auth, $recipients = [], $routes = [];
 		private $url, $now, $lang, $title;
 		
 
@@ -85,16 +85,19 @@
 				$config = $grav['config'];
 				$languages = (array) $config->get('system.languages.supported', []); //the supported languages
 					//$languages = array_keys(\Grav\Plugin\Admin\Admin::siteLanguages()); //the supported languages
-				$hideHomeRoute = !$config->get('system.home.hide_in_urls', false); //the oppsite is on purpose
+				$hideHomeRoute = !$config->get('system.home.hide_in_urls', false); //the opposite is on purpose
 
 				self::$routes = []; //the enriched list of the pages
 				foreach($routes as $route => $path){
 					$page = $pages->get($path); //the current page
-					$langs = $page->translatedLanguages(); //the languages in which the current page is available
+					if($page->visible()){
+						$langs = $page->translatedLanguages(); //the languages in which the current page is available
 
-					//$this->hide_home_route
-					//$this->home_route
-					self::$routes[$page->home() && $hideHomeRoute ? $route[0] : $route] = $page->title() ." (". implode(", ", array_keys($langs) ?: $languages) .")";
+						//$this->hide_home_route
+						//$this->home_route
+						//self::$routes[$page->home() && $hideHomeRoute ? $route[0] : $route] = $page->menu() ." (". implode(", ", array_keys($langs) ?: $languages) .")";
+						self::$routes[$page->home() && $hideHomeRoute ? $route[0] : $route] = $page->title() ." (". implode(", ", array_keys($langs) ?: $languages) .")";
+					}
 				}
 				//array_keys(self::$routes);
 			}
@@ -122,10 +125,14 @@
 				preg_match( "/^192\.168\.\\d+\.\\d+$/", gethostbyname($temp = gethostname()) ) && $temp == "tapmeppe" &&
 				php_uname('s') == "Windows NT" && php_uname('n') == "TAPMEPPE" && php_uname('m') == "AMD64"
 			;
+			self::$locator = Grav::instance()['locator'];
 
-			self::$theme = basename(__DIR__); //the theme name
-			self::$dir = self::path(dirname(__DIR__, 2), 'data', self::$theme); // the directory in which the system specific data will by stored
+			//self::$theme = basename(__DIR__); //the theme name
+			//self::$dir = self::path(dirname(__DIR__, 2), 'data', self::$theme); //the directory in which the system specific data will by stored
+			self::$theme = basename(self::$thm = self::$locator->findResource('theme://')); //the theme name
+			self::$dir = self::$locator->findResource('user-data://'. self::$theme);
 			if(!is_dir(self::$dir)) mkdir(self::$dir, 0775, true); //create the directory if not existant
+
 			self::$slug = explode('-', self::$theme)[0];
 			self::$auth = self::$slug .'_auth_code';
 
@@ -139,7 +146,8 @@
 		/**
 		 * @version 2020.7 @since PM (07.02.2020) standalone
 		 */
-		static function path(...$path):string { return implode(DIRECTORY_SEPARATOR, $path); }
+		static function path(...$path):string { return implode(DS, $path); }
+		//static function path(...$path):string { return implode(DIRECTORY_SEPARATOR, $path); }
 
 
 		public function onFormProcessed(Event $event){
@@ -464,7 +472,7 @@
 
 		private function readTexts():array {
 			return array_merge_recursive(
-				$this->str2Ar( @file_get_contents(self::path(__DIR__, 'languages', self::admin . self::json)) ), //standard
+				$this->str2Ar( @file_get_contents(self::path(self::$thm, 'languages', self::admin . self::json)) ), //standard
 				$this->read('languages') //custom
 			);
 		}
