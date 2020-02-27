@@ -67,6 +67,18 @@ All customisation should be done using [theme inheritance](https://learn.getgrav
 # Preview :see_no_evil: :hear_no_evil: :speak_no_evil:
 The theme created as response to our need for a simple and lightweight solution for the online presence of our team in the year 2019. Therefore, currently there is no better preview than our homepage: https://tapmeppe.solutions .
 
+The following browsers have been test and are fully supported:
+- [brave](https://brave.com/) (version 1.4.95 x64-bit)
+- [VIVALDI](https://vivaldi.com/) (version 2.5.1525.43 x64-bit)
+- [Opera](https://www.opera.com/) (version 67.0.3575.31)
+- [Chrome](https://www.google.com/chrome/) (version 80.0.3987.122 x64-bit)
+- [Firefox](https://www.mozilla.org/firefox/) (version 73.0.1 x64-bit)
+- [Edge](https://www.microsoft.com/edge) (version 44.18362.449.0)
+
+The following browsers are still up for testing:
+- [Edge Chromium](https://www.microsoft.com/edge)
+- [Safari](https://www.apple.com/safari/)
+
 
 # You want to support us? :ok_hand: :gift:
 No problem buddy. We can always use some loose change :money_with_wings: for a cup of :coffee:. You can donate [here](https://paypal.me/tapmeppesols). 
