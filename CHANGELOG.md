@@ -3,6 +3,7 @@
 
 1. [](#improved)
    * Minor improvements
+   * Successful test on the browser: opera
 
 
 # v2020.9
