@@ -8,9 +8,9 @@
 	with the intention of using them inline
 	@see https://learn.getgrav.org/16/themes/theme-vars#media
 #}
-{% if config.theme.slider %}
+{% if THEME.slider %}
 	<section class="slides">
-		{% for slide in config.theme.slider %}
+		{% for slide in THEME.slider %}
 			{% if loop.index == 1 %}
 				<div class="slide" style="background-image: url('{{ slide.path }}')" data-slide="{{ loop.index }}" data-name="{{ slide.name }}"></div>
 			{% else %}{# lazy loading #}

@@ -7,19 +7,19 @@
 {% block body %}
 	{% set object = null %}
 	
-	{% if config.theme.home_page %} {# TRUE if the page selection is NOT empty #}
+	{% if THEME.home_page %} {# TRUE if the page selection is NOT empty #}
 		{# 
 			@see https://learn.getgrav.org/16/themes/theme-vars#pages-object
 			@see https://learn.getgrav.org/16/themes/theme-vars#route
 
 			{% if page.isPage and (
-				page.slug == config.theme.home_page or 
-				page.folder == config.theme.home_page or 
-				page.title|lower == config.theme.home_page|lower
+				page.slug == THEME.home_page or 
+				page.folder == THEME.home_page or 
+				page.title|lower == THEME.home_page|lower
 			) %}
 		#}
 		{% for page in pages.children if object is null %}
-			{% if page.isPage and page.url(false, false, false, true) == config.theme.home_page %}
+			{% if page.isPage and page.url(false, false, false, true) == THEME.home_page %}
 				<section id="home" class="standalone">{{ page.content }}</section>
 				{% set object = page %}
 			{% endif %}
@@ -27,11 +27,11 @@
 		{% endfor %}
 	{% endif %}
 	{# SHOULD NOT MERGE #}
-	{% if config.theme.home_inline and object is null %} {# TRUE if the inline selection is NOT empty #}
+	{% if THEME.home_inline and object is null %} {# TRUE if the inline selection is NOT empty #}
 		{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
 		{% set language = html_lang %}
 		<section id="home" class="inline">
-			{% for inline in config.theme.home_inline if object is null %}
+			{% for inline in THEME.home_inline if object is null %}
 				
 				{% if language == inline.language and inline.content %} {# TRUE if the language matched #}
 					{% markdown %}{{ inline.content }}{% endmarkdown %}
@@ -45,7 +45,7 @@
 	{% if object is null %} {# default behaviour #}
 		<section id="home" class="{{ SLUG }}">
 			{% markdown %}
-				# {{ config.theme.acronym }}
+				# {{ THEME.acronym }}
 				{{ "THEME_UPMORPH_ONSO.BODY"|t }}
 			{% endmarkdown %}
 		</section>

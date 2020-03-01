@@ -3,7 +3,7 @@
 	the recipient address entered is only used if it is a valid email address 
 
 	@since PM (20.12.2019) @deprecated but works well if the goal is validate an email address
-	{% if theme.registration_recipient matches '#^[\\w.%+-]+@[\\w.-]+\.[A-Za-z]{2,}$#' %}
+	{% if THEME.registration_recipient matches '#^[\\w.%+-]+@[\\w.-]+\.[A-Za-z]{2,}$#' %}
 #}
 
 {% macro registration_response(response, class, data) %}
@@ -100,38 +100,29 @@
 {% endmacro %}
 
 
-{% set theme = config.theme %}
-{% if theme.registration_recipients %}
-	{% set notification = uri.query('registration') %}
-	{% set object = null %}
-	{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
-	{% set language = html_lang %}
-	{% import _self as macros %}
-	
-	{% if notification %}
-		
-		{% for registration in theme.registration_texts if object is null %}
-			{% if language == registration.language %}
-				{{ macros.registration_response(notification, '', registration) }}
-				{% set object = registration %}
-			{% endif %}
-		{% endfor %}
-		{% if object is null %} {# default behaviour #}
-			{{ macros.registration_response(notification, theme.slug, theme.registration_texts_def) }}
-		{% endif %}
+{% set notification = uri.query('registration') %}
+{% set object = null %}
+{% import _self as macros %}
 
-	{% elseif theme.registration_texts %} {# TRUE if the inline selection is NOT empty #}
-
-		{% for registration in theme.registration_texts if object is null %}
-			{% if language == registration.language %}
-				{{ macros.registration_form('', theme, pages, registration) }}
-				{% set object = registration %}
-			{% endif %}
-		{% endfor %}
-		{% if object is null %} {# default behaviour #}
-			{{ macros.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
+{% if notification %}
+	{% for registration in THEME.registration_texts if object is null %} {# TRUE if the inline selection is NOT empty #}
+		{% if LANG == registration.language %}
+			{{ macros.registration_response(notification, '', registration) }}
+			{% set object = registration %}
 		{% endif %}
-	{% else %}
-		{{ macros.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
+	{% endfor %}
+	{% if object is null %} {# default behaviour #}
+		{{ macros.registration_response(notification, SLUG, THEME.registration_texts_def) }}
+	{% endif %}
+{% elseif THEME.registration_status and THEME.registration_recipients %}
+	{# DO NOT MERGE #}
+	{% for registration in THEME.registration_texts if object is null %} {# TRUE if the inline selection is NOT empty #}
+		{% if LANG == registration.language %}
+			{{ macros.registration_form('', theme, pages, registration) }}
+			{% set object = registration %}
+		{% endif %}
+	{% endfor %}
+	{% if object is null %} {# default behaviour #}
+		{{ macros.registration_form(SLUG, theme, pages, THEME.registration_texts_def) }}
 	{% endif %}
 {% endif %}

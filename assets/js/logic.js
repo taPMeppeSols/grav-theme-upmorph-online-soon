@@ -83,10 +83,7 @@ const UPMORPH_ACTIVE = 'active';
 			notif = 'section.notification.'
 		;
 		if(button){
-			if(privacy) privacy.addEventListener(
-				'click',
-				_ => button.disabled = !privacy.checked
-			)
+			if(privacy) privacy.addEventListener('click', _ => button.disabled = !privacy.checked)
 			//DO NOT MERGE
 			if(address){
 				address.addEventListener(

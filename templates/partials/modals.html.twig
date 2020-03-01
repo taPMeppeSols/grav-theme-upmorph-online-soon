@@ -1,9 +1,4 @@
 {# PM (22.01.2020) this script is used to generate all the modal containers #}
-
-{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
-{% set theme = config.theme %}
-{% set language = html_lang %}
-
 {% macro modal(id, uri, theme, pages, language, regex = '') %}
 	{% set object = null %}
 	{% set active = uri.query(id|regex_replace('/_/', '-')) ? 'active' : '' %} {# the active flag #}
@@ -44,6 +39,6 @@
 {% endmacro %}
 
 {% import _self as macros %}
-{{ macros.modal('about_us', uri, theme, pages, language) }} {# about us #}
-{{ macros.modal('privacy_policy', uri, theme, pages, language, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
-{{ macros.modal('imprint', uri, theme, pages, language) }} {# imprint #}
+{{ macros.modal('about_us', uri, THEME, pages, LANG) }} {# about us #}
+{{ macros.modal('privacy_policy', uri, THEME, pages, LANG, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
+{{ macros.modal('imprint', uri, THEME, pages, LANG) }} {# imprint #}

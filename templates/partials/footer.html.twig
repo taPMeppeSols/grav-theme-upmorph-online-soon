@@ -5,26 +5,26 @@
 	@see https://alvinalexander.com/drupal/drupal-8-how-string-starts-ends-with-twig-templates
 	#alternative to `regex_replace` {% if url and url starts with 'https://' %}
 #}
-
-{% if config.theme.social_networks.order %} {# TRUE if the order has been manually set by the administrator #}
-	<ul class="socials custom">
-		{% for data in config.theme.social_networks.order %}
-			{% set network = data.target %}
-			{% set url = config.theme.social_networks["urls_" ~ network] %}
-			{% if url %}<li><a href="{{ regex_replace(url, '#^(https?://)?#', 'https://') }}" target="_blank" class="icon-{{ network|replace({'_': "-"}) }}"></a></li>{% endif %}
-		{% endfor %}
-	</ul>
-{% else %} {# TRUE if the default/alphabetical order is used #}
-	<ul class="icons alphabetical">
-		{% for network in ['facebook', 'github', 'instagram', 'linkedin', 'tumblr', 'twitter', 'whatsapp', 'xing'] %}
-			{% set url = config.theme.social_networks["urls_" ~ network] %}
-			{% if url %}<li><a href="{{ regex_replace(url, '#^(https?://)?#', 'https://') }}" target="_blank" class="icon-{{ network|replace({'_': "-"}) }}"></a></li>{% endif %}
-		{% endfor %}
-	</ul>
+{% if THEME.social_networks.status %}
+	{% if THEME.social_networks.order %} {# TRUE if the order has been manually set by the administrator #}
+		<ul class="socials custom">
+			{% for data in THEME.social_networks.order %}
+				{% set network = data.target %}
+				{% set url = THEME.social_networks["urls_" ~ network] %}
+				{% if url %}<li><a href="{{ regex_replace(url, '#^(https?://)?#', 'https://') }}" target="_blank" class="icon-{{ network|replace({'_': "-"}) }}"></a></li>{% endif %}
+			{% endfor %}
+		</ul>
+	{% else %} {# TRUE if the default/alphabetical order is used #}
+		<ul class="socials {{ SLUG }}">
+			{% for network in ['facebook', 'github', 'instagram', 'linkedin', 'tumblr', 'twitter', 'whatsapp', 'xing'] %}
+				{% set url = THEME.social_networks["urls_" ~ network] %}
+				{% if url %}<li><a href="{{ regex_replace(url, '#^(https?://)?#', 'https://') }}" target="_blank" class="icon-{{ network|replace({'_': "-"}) }}"></a></li>{% endif %}
+			{% endfor %}
+		</ul>
+	{% endif %}
 {% endif %}
 
 
-{% set theme = config.theme %}
 {% set regex = '/(^[^\\[]*\\[|\\][^\\]]*$)/' %}
 {% macro legal(id, theme, pages, language, regex = '') %}
 	{% set object = null %}
@@ -55,10 +55,8 @@
 <ul class="legal">
 	{# privacy policy & imprint @version 2020.7 @since PM (07.02.2020) #}
 	{% import _self as macros %}
-	{% set theme = config.theme %}
-	{% set language = html_lang %}
-	{{ macros.legal('privacy_policy', theme, pages, language, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
-	{{ macros.legal('imprint', theme, pages, language) }} {# imprint #}
+	{{ macros.legal('privacy_policy', THEME, pages, LANG, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
+	{{ macros.legal('imprint', THEME, pages, LANG) }} {# imprint #}
 
 	<li>&copy; {{ now|date("Y") }} {{ site.title }}</li>
 </ul>

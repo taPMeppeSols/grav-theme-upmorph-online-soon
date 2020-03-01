@@ -7,14 +7,17 @@
 	{% for item in site.menu %}
 #}
 
+{% set THEME = config.theme %}
+{% set SLUG = upmorph_slug ?: THEME.slug %}
+{% set LANG = html_lang %} {# simple wrapper #}
+
 {% import _self as macros %}
 {% macro path(name) %}partials/{{ name }}.html.twig{% endmacro %}
 
-{% set SLUG = upmorph_slug ?: config.theme.slug %}
 
 <!DOCTYPE HTML>
 <html 
-	lang="{{ html_lang }}"
+	lang="{{ LANG }}"
 	{# lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}" #}
 	class="{{ browser.browser }} {{ browser.platform }}"	
 >
@@ -22,7 +25,7 @@
 		{% block head %}
 			<meta charset="utf-8"/>
 			<title>
-				{% if config.theme.title.enabled %} 
+				{% if THEME.title.enabled %} 
 					{{ site.title|e('html') }} 
 					{% if header.title %} :: {{ header.title|e('html') }}{% endif %}
 				{% else %}{{ header.title|e('html') }}{% endif %}
@@ -33,9 +36,9 @@
 			<meta name="theme-color" content="#2b2b2b">
 			{% include macros.path('metadata') %}
 
-			{% if config.theme.favicon %}
+			{% if THEME.favicon %}
 				{# @see https://twig.symfony.com/doc/3.x/tags/for.html#iterating-over-keys #}
-				{% for favicon in config.theme.favicon %} {# one round #}
+				{% for favicon in THEME.favicon %} {# one round #}
 					<link rel="icon" type="{{ favicon.type }}" href="{{ favicon.path }}" />
 				{% endfor %}
 			{% else %}
@@ -90,22 +93,21 @@
 			#}
 			{# @version 2020.7 @since PM (08.02.2020) @deprecated
 			{% set recipients = [] %}
-			{% for recipient in config.theme.registration_recipients %}
+			{% for recipient in THEME.registration_recipients %}
 				{% set recipients = recipients|merge([recipient.recipient]) %}
 			{% endfor %}
 			<script>
 				const UPMORPH = {
 					slug: '{{ SLUG }}',
-					lang: '{{ html_lang }}',
-					//lang: '{{ grav.language.getActive ?: grav.config.site.default_lang }}',
+					lang: '{{ LANG }}',
 					qwertzuiop: '{{ recipients|json_encode|base64_encode|base64_encode }}',
 					title: '{{ site.title|base64_encode }}'
 				};
 			</script>
 			#}
 			{#
-				<pre>{{ config.theme.registration_recipients|print_r }}</pre>
-				<pre>{{ config.theme.registration_recipients|json_encode }}</pre>
+				<pre>{{ THEME.registration_recipients|print_r }}</pre>
+				<pre>{{ THEME.registration_recipients|json_encode }}</pre>
 				<pre>{{ recipients|print_r }}</pre>
 			#}
 			

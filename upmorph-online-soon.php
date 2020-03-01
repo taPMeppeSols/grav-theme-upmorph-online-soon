@@ -195,8 +195,8 @@
 				$this->lang = $this->grav['language']->getActive() ?: $this->config->get('site.default_lang', self::lang);
 				$this->title = $this->config->get('site.title', self::$theme);
 
-				if( $_POST[self::$auth] == ($code = $this->authCode($this->url)) ) $this->register($code);
-				elseif(( $auth = $this->clean($_GET[self::$auth]) ) == $code) $this->optIn(); //opt-in step from the confirmation email
+				if( $_POST[self::$auth] == ($code = $this->authCode($this->url)) ) $this->register($this->config->get('theme.registration_status', false), 'inactive', $code);
+				elseif(( $auth = $this->clean($_GET[self::$auth]) ) == $code) $this->optIn($this->config->get('theme.registration_status', false), 'inactive'); //opt-in step from the confirmation email
 				elseif( $this->isEmail($auth) && ($_GET['delete'] || $_GET['deletion'] || $_GET['remove'] || $_GET['removal']) ) $this->delete($auth); //delete option
 
 				$event->stopPropagation(); //this line will actually never be reached; it was set just to remember its existence for future projects
@@ -226,37 +226,43 @@
 		 * #die()
 		 * @version 2020.7 @since PM (06-07.02.2020) standalone
 		 * @version 2020.8 @since PM (08.02.2020) object oriented
+		 * @version 2020.14 @since PM (01.03.2020) $status has been added
+		 * @param bool $status TRUE if the registration module if available
+		 * @param string $statusEr the status error code
+		 * @param bool $code
 		 */
-		private function register(string $code){
+		private function register(bool $status, string $statusEr, string $code){
 			$response = self::error;
 			$error = "";
 
-			if( $_POST['name'] === "" && $this->isEmail($email = $_POST[self::email]) ){ //name is the honeypot
-				$emails = $this->read(self::emails);
-				if($emails[$email]) $response = 'exists';
-				else{
-					$aliases = $this->read(self::aliases);
-					do $alias = uniqid($this->now ."_", true); while($aliases[$alias]); //making sure the alias is really unique
+			if($status){
+				if( $_POST['name'] === "" && $this->isEmail($email = $_POST[self::email]) ){ //name is the honeypot
+					$emails = $this->read(self::emails);
+					if($emails[$email]) $response = 'exists';
+					else{
+						$aliases = $this->read(self::aliases);
+						do $alias = uniqid($this->now ."_", true); while($aliases[$alias]); //making sure the alias is really unique
 
-					$aliases[$alias] = base64_encode(implode(self::sep, [$this->now, $email]) ); //request date & email address
-					if($this->write(self::aliases, $aliases)){ //TRUE if the data were successfully stored
-						$url = "$this->url?". self::$auth ."=". urlencode($code) ."&data=". urlencode($alias);
-						if(self::$dev) file_put_contents(self::path(self::$dir, 'urls.log.md'), "[$alias]($url)<br>\n", FILE_APPEND | LOCK_EX);
+						$aliases[$alias] = base64_encode(implode(self::sep, [$this->now, $email]) ); //request date & email address
+						if($this->write(self::aliases, $aliases)){ //TRUE if the data were successfully stored
+							$url = "$this->url?". self::$auth ."=". urlencode($code) ."&data=". urlencode($alias);
+							if(self::$dev) file_put_contents(self::path(self::$dir, 'urls.log.md'), "[$alias]($url)<br>\n", FILE_APPEND | LOCK_EX);
 
-						if($texts = $this->readTexts()){
-							list($sent, $error) = $this->notify( //send the confirmation mail to the visitor
-								$email,
-								'visitor', 
-								$texts[$this->lang] ?: $texts[self::lang], //`self::lang` security measure
-								['__URL_PAGE__', '__URL_CONFIRMATION__', '__TITLE__'], 
-								[$this->url, $url, $this->title], 
-							);
-							if($sent) $response = self::success;
+							if($texts = $this->readTexts()){
+								list($sent, $error) = $this->notify( //send the confirmation mail to the visitor
+									$email,
+									'visitor', 
+									$texts[$this->lang] ?: $texts[self::lang], //`self::lang` security measure
+									['__URL_PAGE__', '__URL_CONFIRMATION__', '__TITLE__'], 
+									[$this->url, $url, $this->title], 
+								);
+								if($sent) $response = self::success;
 
-						}else $error = "texts-missing";
-					}else $error = "alias-storage-failed";
-				}
-			}else $error = "email-match-failed [email:$email]";
+							}else $error = "texts-missing";
+						}else $error = "alias-storage-failed";
+					}
+				}else $error = "email-match-failed [email:$email]";
+			}else $error = $statusEr;
 
 			if($error) $this->errors("REGISTER", "$email $error");
 			die($response);
@@ -267,49 +273,54 @@
 		 * #redirect()
 		 * @version 2020.7 @since PM (06-07.02.2020) standalone
 		 * @version 2020.8 @since PM (08.02.2020) object oriented
+		 * @version 2020.14 @since PM (01.03.2020) $status has been added
+		 * @param bool $status TRUE if the registration module if available
+		 * @param string $statusEr the status error code
 		 */
-		private function optIn(){
+		private function optIn(bool $status, string $statusEr){
 			$error = "";
 
-			if( $alias = $this->clean($_GET['data']) ){
-				$aliases = $this->read(self::aliases);
-				$emails = $this->read(self::emails);
-
-				//check the availability of the alias
-				$found;
-				if($data = $aliases[$alias]) $found = true;
-				else{
-					foreach($emails as $email) if($email[self::alias] == $alias){ //TRUE if the alias has already been used in the past
-						$this->redirect('exists'); //the address exists already
-						break; //this line will never be reached, but aw well :-)
-					}
-					$found = false; //the line will only be reached if the alias has never been used before
-				}
-				//DO NOT MERGE
-				if($found){ //TRUE if the alias has been found in the list of aliases
-					list($date, $email) = explode(self::sep, base64_decode($data));
-					
-					$d = "\\d{2}";
-					if(preg_match("@$d$d-$d-$d $d:$d:$d@", $date) && $this->isEmail($email)){
-						//DO NOT MERGE
-						if($emails[$email]){
-							unset($aliases[$alias]); //remove the alias
-							$this->write(self::aliases, $aliases);
+			if($status){
+				if( $alias = $this->clean($_GET['data']) ){
+					$aliases = $this->read(self::aliases);
+					$emails = $this->read(self::emails);
 	
+					//check the availability of the alias
+					$found;
+					if($data = $aliases[$alias]) $found = true;
+					else{
+						foreach($emails as $email) if($email[self::alias] == $alias){ //TRUE if the alias has already been used in the past
 							$this->redirect('exists'); //the address exists already
-						}else{ //add the address to list
-							$emails[$email] = ['request' => $date, 'opt_in' => $this->now, self::alias => $alias]; //new entry
-							if($this->write(self::emails, $emails)){ //TRUE if the new email was successfully stored
-								$this->notifyAdmins('registration', $email, "OPT-IN");
-	
+							break; //this line will never be reached, but aw well :-)
+						}
+						$found = false; //the line will only be reached if the alias has never been used before
+					}
+					//DO NOT MERGE
+					if($found){ //TRUE if the alias has been found in the list of aliases
+						list($date, $email) = explode(self::sep, base64_decode($data));
+						
+						$d = "\\d{2}";
+						if(preg_match("@$d$d-$d-$d $d:$d:$d@", $date) && $this->isEmail($email)){
+							//DO NOT MERGE
+							if($emails[$email]){
 								unset($aliases[$alias]); //remove the alias
 								$this->write(self::aliases, $aliases);
-								$this->redirect(self::success);
-							}else $error = "email-storage-failed [email:$email]";
-						} //endelse
-					}else $error = "data-invalid [date:$date], [email:$email]";
-				}else $error = "alias-invalid [alias:$alias]";
-			}else $error = "alias-empty";
+		
+								$this->redirect('exists'); //the address exists already
+							}else{ //add the address to list
+								$emails[$email] = ['request' => $date, 'opt_in' => $this->now, self::alias => $alias]; //new entry
+								if($this->write(self::emails, $emails)){ //TRUE if the new email was successfully stored
+									$this->notifyAdmins('registration', $email, "OPT-IN");
+		
+									unset($aliases[$alias]); //remove the alias
+									$this->write(self::aliases, $aliases);
+									$this->redirect(self::success);
+								}else $error = "email-storage-failed [email:$email]";
+							} //endelse
+						}else $error = "data-invalid [date:$date], [email:$email]";
+					}else $error = "alias-invalid [alias:$alias]";
+				}else $error = "alias-empty";
+			}else $error = $statusEr;
 			
 			$this->errors("OPT-IN", $error);
 			$this->redirect(self::error);
@@ -323,6 +334,8 @@
 		 * @param string $email the email address to delete
 		 */
 		private function delete(string $email){
+			//`if($this->status())` is missing here on purpose
+			
 			$flag = 'deletion';
 			$emails = $this->read(self::emails); //load the list of emails
 			if($emails[$email]){ //TRUE if email has been found

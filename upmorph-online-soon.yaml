@@ -5,6 +5,7 @@ acronym: uPMORph
 
 title:
   enabled: true
+registration_status: false
 registration_texts_def:
   button: THEME_UPMORPH_ONSO.BUTTON
   email: THEME_UPMORPH_ONSO.EMAIL
@@ -19,6 +20,7 @@ registration_texts_def:
   deletion_not_found: THEME_UPMORPH_ONSO.DELETION_NOT_FOUND
   deletion_success: THEME_UPMORPH_ONSO.DELETION_SUCCESS
 social_networks:
+  status: true
   urls_facebook: https://facebook.com/
   urls_instagram: https://instagram.com/
   urls_twitter: https://twitter.com/

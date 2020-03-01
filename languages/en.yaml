@@ -39,6 +39,8 @@ THEME_UPMORPH_ONSO:
   REGISTRATION_RECIPIENT: Recipient
   REGISTRATION_RECIPIENTS: Recipients
   REGISTRATION_RECIPIENTS_HELP: The administrators that are going to receive all the visitor registration requests. Leave this section empty to DEACTIVATE the registration module. To customise the emails received by either party, copy the file '/user/themes/upmorph-online-soon/languages/admin.json' to '/user/data/upmorph-online-soon/languages.json' and overwrite it. Be aware of words starting & ending with '__', they are placeholders replaced adequately during the lifecycle of the texts.
+  REGISTRATION_STATUS_DESC: The <strong>status</strong> must be enabled & at least one <strong>recipient</strong> must be set in order to activate the registration module.
+  REGISTRATION_STATUS_HELP: The STATUS must be enabled & at least one RECIPIENT must be set in order to activate the registration module.
   REGISTRATION_TEXTS: Texts
   REGISTRATION_TEXTS_BUTTON: Button label
   REGISTRATION_TEXTS_HELP: The texts to use before & after the registration process. If left empty the default texts will be used.
@@ -64,6 +66,8 @@ THEME_UPMORPH_ONSO:
   SOCIAL_NETWORKS_DESC: Enter the URL of the landing page on the respective social network.
   SOCIAL_NETWORKS_ORDER: Order of the networks
   SOCIAL_NETWORKS_ORDER_HELP: Set the order of the social networks. The 'drag & drop' function is available here.
+  SOCIAL_NETWORKS_STATUS_DESC: The <strong>status</strong> must be enabled & at least one <strong>URL</strong> must be set in order to activate the social networks module.
+  SOCIAL_NETWORKS_STATUS_HELP: The STATUS must be enabled & at least one URL must be set in order to activate the social networks module.
   SOCIAL_NETWORKS_URLS: URLs
   SOCIAL_NETWORKS_URLS_FACEBOOK: Facebook
   SOCIAL_NETWORKS_URLS_GITHUB: Github
@@ -73,6 +77,7 @@ THEME_UPMORPH_ONSO:
   SOCIAL_NETWORKS_URLS_TWITTER: Twitter
   SOCIAL_NETWORKS_URLS_WHATSAPP: WhatsApp
   SOCIAL_NETWORKS_URLS_XING: Xing
+  STATUS: Status
   TITLE: Site title
   TITLE_DESC: Should the site title set in the <a href="../config/site" target="_blank">configuration</a> be accessible in the frontend?
   TITLE_HELP: Should the site title set in the configuration be accessible in the frontend?
