@@ -32,7 +32,7 @@
 	{% if theme[id ~'_page'] %} {# TRUE if the page selection is NOT empty #}
 		{% for page in pages.children if object is null %}
 			
-			{% if page.isPage and page.route == theme[id ~'_page'] and page.header.title and page.content %}
+			{% if page.isPage and page.url(false, false, false, true) == theme[id ~'_page'] and page.header.title and page.content %}
 				<li class="button button-underline capital standalone" data-target="{{ id }}">{{ regex == '' ? page.header.title : page.header.title|regex_replace(regex, '') }}</li> {# remove everything around the term #}
 				{% set object = page %}
 			{% endif %}
@@ -54,10 +54,11 @@
 
 <ul class="legal">
 	{# privacy policy & imprint @version 2020.7 @since PM (07.02.2020) #}
+	{% import _self as macros %}
 	{% set theme = config.theme %}
 	{% set language = html_lang %}
-	{{ _self.legal('privacy_policy', theme, pages, language, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
-	{{ _self.legal('imprint', theme, pages, language) }} {# imprint #}
+	{{ macros.legal('privacy_policy', theme, pages, language, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
+	{{ macros.legal('imprint', theme, pages, language) }} {# imprint #}
 
-	<li>&copy; {{ now | date("Y") }} {{ site.title }}</li>
+	<li>&copy; {{ now|date("Y") }} {{ site.title }}</li>
 </ul>

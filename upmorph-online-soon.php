@@ -6,6 +6,8 @@
 	 * @example 
 	 * - http://upmorph.grav.meppe/en
 	 * - http://upmorph.grav.meppe/admin
+	 * - http://localhost/solutions/upmorph/cms_grav_empty/en
+	 * - http://localhost/solutions/upmorph/cms_grav_empty/admin
 	 */
 	namespace Grav\Theme;
 
@@ -84,19 +86,22 @@
 				
 				$config = $grav['config'];
 				$languages = (array) $config->get('system.languages.supported', []); //the supported languages
-					//$languages = array_keys(\Grav\Plugin\Admin\Admin::siteLanguages()); //the supported languages
+				//$languages = array_keys(\Grav\Plugin\Admin\Admin::siteLanguages()); //the supported languages
 				$hideHomeRoute = !$config->get('system.home.hide_in_urls', false); //the opposite is on purpose
 
 				self::$routes = []; //the enriched list of the pages
-				foreach($routes as $route => $path){
+				foreach($routes as /*$route => */$path){
 					$page = $pages->get($path); //the current page
 					if($page->visible()){
 						$langs = $page->translatedLanguages(); //the languages in which the current page is available
 
 						//$this->hide_home_route
 						//$this->home_route
+						//self::$routes[$page->home() && $hideHomeRoute ? $route[0] : $route] = $page->title() ." (". implode(", ", array_keys($langs) ?: $languages) .")";
 						//self::$routes[$page->home() && $hideHomeRoute ? $route[0] : $route] = $page->menu() ." (". implode(", ", array_keys($langs) ?: $languages) .")";
-						self::$routes[$page->home() && $hideHomeRoute ? $route[0] : $route] = $page->title() ." (". implode(", ", array_keys($langs) ?: $languages) .")";
+						
+						//@see system/src/Grav/Common/Page/Page.php :: url
+						self::$routes[$page->url(false, false, false, true)] = $page->title() ." (". implode(", ", array_keys($langs) ?: $languages) .")";
 					}
 				}
 				//array_keys(self::$routes);

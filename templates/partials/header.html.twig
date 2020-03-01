@@ -6,7 +6,7 @@
 				<img src="{{ logo.path }}" alt="{{ config.site.title }} :: LOGO">
 			{% endfor %}
 		{% else %}
-			<img class="{{ upmorph_slug ?: config.theme.slug }}" src="{{ url('theme://images/logo.png') }}" alt="{{ config.site.title }} :: LOGO">
+			<img class="{{ SLUG }}" src="{{ url('theme://images/logo.png') }}" alt="{{ config.site.title }} :: LOGO">
 		{% endif %}
 	</a>
 </section>
@@ -18,7 +18,7 @@
 	{% if config.theme.about_us_page %} {# TRUE if the page selection is NOT empty #}
 		{% for page in pages.children if object is null %}
 			
-			{% if page.isPage and page.route == config.theme.about_us_page and page.header.title and page.content %}
+			{% if page.isPage and page.url(false, false, false, true) == config.theme.about_us_page and page.header.title and page.content %}
 				<div class="standalone">
 					<button data-target="about_us">{{ page.header.title }}</button>
 				</div>

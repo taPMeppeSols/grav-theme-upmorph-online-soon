@@ -1,11 +1,22 @@
 THEME_UPMORPH_ONSO:
+  BODY: A simple template for telling the world<br>- that you'll launch your next big thing soon or<br>- that your site is currently under maintenance.
+  BUTTON: Register
   CONTENT: Content
+  DELETION_ERROR: Error! The email address couldn't be removed from the mailing list.
+  DELETION_NOT_FOUND: The email address could not be found in the mailing list.
+  DELETION_SUCCESS: The email address has been successfully removed from the mailing list.
+  EMAIL: Email address
   FAVICON: Favicon
-  FAVICON_DESC: Recommended <strong>512x512</strong> pixels. If left empty the default favicon will be used.
-  FAVICON_HELP: Recommended 512x512 pixels. If left empty the default favicon will be used.
+  FAVICON_DESC: Recommended <strong>512x512</strong> pixels. If left empty, the default favicon will be used.
+  FAVICON_HELP: Recommended 512x512 pixels. If left empty, the default favicon will be used.
   HEAD: Head
   LOGO: Logo
-  LOGO_DESC: If left empty the default logo will be used.
+  NAME: Name
+  NOTIFICATION_ERROR: Error! Something went wrong.
+  NOTIFICATION_EXISTS: This email address has already been registered.
+  NOTIFICATION_PROGRESS: In progress ...
+  NOTIFICATION_SUCCESS: Success! Check your inbox.
+  LOGO_DESC: If left empty, the default logo will be used.
   PAGE_ABOUT_US: About us (standalone page)
   PAGE_ABOUT_US_INLINE: About us (inline)
   PAGE_ABOUT_US_INLINE_HELP: The text that will appear at the head of the site.
@@ -18,33 +29,36 @@ THEME_UPMORPH_ONSO:
   PAGE_LANGUAGE: Language
   PAGE_LANGUAGE_HELP: Select the default language to enable the content in all languages.
   PAGE_PRIVACY_POLICY: Privacy policy (standalone page)
-  PAGE_PRIVACY_POLICY_DESC: Use <strong>only</strong> the square brackets <code>[ ... ]</code> to wrap the term/word in the title that should be used as the clickable element to open/view the privacy policy. The privacy policy can be directly accessed <a href="/?privacy-policy=1" target="_blank">HERE</a><br><strong>Alternatively to the inline notice</strong> a <em style="color:#f8444e">page</em> in which the content is located can be used.
-  PAGE_PRIVACY_POLICY_HELP: Use ONLY the square brackets ([ ... ]) to wrap the term/word in the title that should be used as the clickable element to open/view the privacy policy. The privacy policy can be directly accessed here: _HOME_URL_?privacy-policy=1
+  PAGE_PRIVACY_POLICY_DESC: Use <strong>only</strong> the square brackets <code>[ ... ]</code> to mark the term/word in the title that should be used as the clickable element to open/view the privacy policy. The privacy policy can be directly accessed <a href="/?privacy-policy=1" target="_blank">here</a>.<br><strong>Alternatively to the inline notice</strong> a <em style="color:#f8444e">page</em> in which the content is located can be used.
+  PAGE_PRIVACY_POLICY_HELP: Use ONLY the square brackets ([ ... ]) to mark the term/word in the title that should be used as the clickable element to open/view the privacy policy. The privacy policy can be directly accessed here: _HOME_URL_?privacy-policy=1 .
   PAGE_PRIVACY_POLICY_INLINE: Privacy policy (inline)
-  PAGE_PRIVACY_POLICY_INLINE_HELP: The text that will appear in the registration form. Use ONLY the square brackets ([ ... ]) to wrap the term/word in the title that should be used as the clickable element to open/view the privacy policy.
+  PAGE_PRIVACY_POLICY_INLINE_HELP: The text that will appear in the registration form. Use ONLY the square brackets ([ ... ]) to mark the term/word in the title that should be used as the clickable element to open/view the privacy policy.
   PAGE_TITLE: Title
   SELECT: '-- Select --'
   REGISTRATION: Registration
   REGISTRATION_RECIPIENT: Recipient
   REGISTRATION_RECIPIENTS: Recipients
-  REGISTRATION_RECIPIENTS_HELP: The administrators that are going to receive all the visitor registration requests. Leave this section empty to DEACTIVATE the registration module. To customise the emails received by either party, copy the file '/user/themes/upmorph-online-soon/languages.json' to '/user/data/upmorph-online-soon/languages.json' and overwrite it. Be aware of words starting & ending with '__', they are placeholders replaced adequately during the lifecycle of the texts.
+  REGISTRATION_RECIPIENTS_HELP: The administrators that are going to receive all the visitor registration requests. Leave this section empty to DEACTIVATE the registration module. To customise the emails received by either party, copy the file '/user/themes/upmorph-online-soon/languages/admin.json' to '/user/data/upmorph-online-soon/languages.json' and overwrite it. Be aware of words starting & ending with '__', they are placeholders replaced adequately during the lifecycle of the texts.
   REGISTRATION_TEXTS: Texts
   REGISTRATION_TEXTS_BUTTON: Button label
   REGISTRATION_TEXTS_HELP: The texts to use before & after the registration process. If left empty the default texts will be used.
   REGISTRATION_TEXTS_EMAIL: Email field placeholder
-  REGISTRATION_TEXTS_NOTIFICATION_ERROR: Notification error
-  REGISTRATION_TEXTS_NOTIFICATION_EXISTS: Notification already exists
-  REGISTRATION_TEXTS_NOTIFICATION_PROGRESS: Notification in progress
-  REGISTRATION_TEXTS_NOTIFICATION_SUCCESS: Notification success
-  REGISTRATION_TEXTS_RESPONSE_ERROR: Registration error
-  REGISTRATION_TEXTS_RESPONSE_EXISTS: Registration already exists
-  REGISTRATION_TEXTS_RESPONSE_SUCCESS: Registration success
-  REGISTRATION_TEXTS_UNDO_ERROR: Undo registration error
-  REGISTRATION_TEXTS_UNDO_NOT_FOUND: Undo registration not found
-  REGISTRATION_TEXTS_UNDO_SUCCESS: Undo registration success
-  SLIDER: Background slider
-  SLIDER_DESC: The list images to use in the slider.<br>Recommended <strong>1920x900</strong> pixels. If left empty the default slides will be used.
-  SLIDER_HELP: The list images to use in the slider. Recommended 1920x900 pixels. If left empty the default slides will be used.
+  REGISTRATION_TEXTS_NOTIFICATION_ERROR: Notification: error
+  REGISTRATION_TEXTS_NOTIFICATION_EXISTS: Notification: already exists
+  REGISTRATION_TEXTS_NOTIFICATION_PROGRESS: Notification: in progress
+  REGISTRATION_TEXTS_NOTIFICATION_SUCCESS: Notification: success
+  REGISTRATION_TEXTS_RESPONSE_ERROR: Registration: error
+  REGISTRATION_TEXTS_RESPONSE_EXISTS: Registration: already exists
+  REGISTRATION_TEXTS_RESPONSE_SUCCESS: Registration: success
+  REGISTRATION_TEXTS_UNDO_ERROR: Undo registration: error
+  REGISTRATION_TEXTS_UNDO_NOT_FOUND: Undo registration: not found
+  REGISTRATION_TEXTS_UNDO_SUCCESS: Undo registration: success
+  RESPONSE_ERROR: Error! The registration has failed.
+  RESPONSE_EXISTS: This email address has already been registered.
+  RESPONSE_SUCCESS: The registration was successful.
+  SLIDER: Background slideshow
+  SLIDER_DESC: The list images to use in the slideshow.<br>Recommended <strong>1920x900</strong> pixels. If left empty the default images will be used.
+  SLIDER_HELP: The list images to use in the slideshow. Recommended 1920x900 pixels. If left empty the default images will be used.
   SOCIAL_NETWORK: Social network
   SOCIAL_NETWORKS: Social networks
   SOCIAL_NETWORKS_DESC: Enter the URL of the landing page on the respective social network.

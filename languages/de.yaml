@@ -1,52 +1,69 @@
 THEME_UPMORPH_ONSO:
-  CONTENT: Content
+  BODY: Eine einfache Vorlage, um der Welt mitzuteilen,<br>-dass Sie Ihr nächstes großes Ding bald starten werden oder<br>-dass Ihre Website derzeit gewartet wird.
+  BUTTON: Registrieren
+  CONTENT: Inhalt
+  DELETION_ERROR: Fehler! Die E-Mail-Adresse konnte nicht von der Mailingliste entfernt werden.
+  DELETION_NOT_FOUND: Die E-Mail-Adresse konnte nicht in der Mailingliste gefunden werden.
+  DELETION_SUCCESS: Die E-Mail-Adresse wurde erfolgreich von der Mailingliste entfernt.
+  EMAIL: E-Mail-Adresse
   FAVICON: Favicon
-  FAVICON_DESC: Recommended <strong>512x512</strong> pixels. If left empty the default favicon will be used.
-  FAVICON_HELP: Recommended 512x512 pixels. If left empty the default favicon will be used.
-  HEAD: Head
+  FAVICON_DESC: Empfohlen <strong>512x512</strong> Pixel. Wenn leer gelassen wird, wird das Standard-Favicon verwendet.
+  FAVICON_HELP: Empfohlen 512x512 Pixel. Wenn leer gelassen wird, wird das Standard-Favicon verwendet.
+  HEAD: Kopf
   LOGO: Logo
-  LOGO_DESC: If left empty the default logo will be used.
-  PAGE_ABOUT_US: About us (standalone page)
-  PAGE_ABOUT_US_INLINE: About us (inline)
-  PAGE_ABOUT_US_INLINE_HELP: The text that will appear in the menu.
-  PAGE_DESC: <strong>Alternatively to the inline notice</strong> a <em style="color:#f8444e">page</em> in which the content is located can be used.
-  PAGE_HOME: Home (standalone page)
-  PAGE_HOME_INLINE: Home (inline)
-  PAGE_LANGUAGE: Language
-  PAGE_LANGUAGE_HELP: Select the default language to enable the content in all languages.
-  PAGE_PRIVACY_POLICY: Privacy policy (standalone page)
-  PAGE_PRIVACY_POLICY_DESC: Use <strong>ONLY</strong> the square brackets <code>[ ... ]</code> to wrap the term/word in the title that should be used to open/view the privacy policy. The privacy policy can be directly accessed <a href="/?privacy-policy=1" target="_blank">HERE</a><br><strong>Alternatively to the inline notice</strong> a <em style="color:#f8444e">page</em> in which the content is located can be used.
-  PAGE_PRIVACY_POLICY_HELP: Use ONLY the square brackets ([ ... ]) to wrap the term/word in the title that should be used to open/view the privacy policy. The privacy policy can be directly accessed here: _HOME_URL_?privacy-policy=1
-  PAGE_PRIVACY_POLICY_INLINE: Privacy policy (inline)
-  PAGE_PRIVACY_POLICY_INLINE_HELP: The text that will appear in the registration form. Use ONLY the square brackets ([ ... ]) to wrap the term/word in the title that should be used to open/view the privacy policy.
-  PAGE_TITLE: Title
-  SELECT: '-- Select --'
-  REGISTRATION: Registration
-  REGISTRATION_RECIPIENT: Recipient
-  REGISTRATION_RECIPIENTS: Recipients
-  REGISTRATION_RECIPIENTS_HELP: The administrators that are going to receive all the visitor registration requests. Leave this section empty to DEACTIVATE the registration module. To customise the emails received by either party, copy the file '/user/themes/upmorph-online-soon/languages.json' to '/user/data/upmorph-online-soon/languages.json' and overwrite it. Be aware of words starting & ending with '__', they are placeholders replaced adequately during the lifecycle of the texts.
+  LOGO_DESC: Wenn nichts angegeben wird, wird das Standardlogo verwendet.
+  NAME: Name
+  NOTIFICATION_ERROR: Fehler! Etwas ist schiefgegangen.
+  NOTIFICATION_EXISTS: Diese E-Mail-Adresse wurde bereits registriert.
+  NOTIFICATION_PROGRESS: In Bearbeitung ...
+  NOTIFICATION_SUCCESS: Erfolg! Überprüfen Sie Ihren Posteingang.
+  PAGE_ABOUT_US: Über uns (eigenständige Seite)
+  PAGE_ABOUT_US_INLINE: Über uns (inline)
+  PAGE_ABOUT_US_INLINE_HELP: Der Text, der im Menü erscheinen wird.
+  PAGE_DESC: <strong>Alternativ zum Inline-Hinweis</strong> kann eine <em style="color:#f8444e">Seite</em> verwendet werden, in der sich der Inhalt befindet.
+  PAGE_HOME: Startseite (eigenständige Seite)
+  PAGE_HOME_INLINE: Startseite (inline)
+  PAGE_IMPRINT: Impressum (eigenständige Seite)
+  PAGE_IMPRINT_INLINE: Impressum (inline)
+  PAGE_IMPRINT_INLINE_HELP: Der Text, der am Fuß der Website erscheinen wird.
+  PAGE_LANGUAGE: Sprache
+  PAGE_LANGUAGE_HELP: Wählen Sie die Standardsprache aus, um den Inhalt in allen Sprachen zu aktivieren.
+  PAGE_PRIVACY_POLICY: Datenschutzrichtlinie (eigenständige Seite)
+  PAGE_PRIVACY_POLICY_DESC: Verwenden Sie <strong>nur</strong> die eckigen Klammern <code>[ ... ]</code>, um den Begriff/Wort im Titel zu markieren, der zum Öffnen/Anzeigen der Datenschutzrichtlinie verwendet werden soll. Auf die Datenschutzerklärung kann man <a href="/?privacy-policy=1" target="_blank">hier</a> direkt zugreifen.<br><strong>Alternativ zu dem Inline-Hinweis</strong> kann eine <em style="color:#f8444e">Seite</em> verwendet werden, in der sich der Inhalt befindet.
+  PAGE_PRIVACY_POLICY_HELP: Verwenden Sie NUR die eckigen Klammern <code>[ ... ]</code>, um den Begriff/Wort im Titel zu markieren, der zum Öffnen/Anzeigen der Datenschutzrichtlinie verwendet werden soll. Auf die Datenschutzerklärung kann man hier direkt zugreifen: _HOME_URL_?privacy-policy=1 .
+  PAGE_PRIVACY_POLICY_INLINE: Datenschutzrichtlinie (inline)
+  PAGE_PRIVACY_POLICY_INLINE_HELP: Der Text, der auf dem Anmeldeformular erscheint. Verwenden Sie NUR die eckigen Klammern ([ ... ]), um den Begriff/Wort im Titel zu markieren, der zum Öffnen/Anzeigen der Datenschutzrichtlinie verwendet werden soll.
+  PAGE_TITLE: Titel
+  SELECT: '-- Auswahl --'
+  REGISTRATION: Registrierung
+  REGISTRATION_RECIPIENT: Empfänger
+  REGISTRATION_RECIPIENTS: Empfänger
+  REGISTRATION_RECIPIENTS_HELP: Die Administratoren, die alle Besucherregistrierungsanfragen erhalten werden. Lassen Sie diesen Abschnitt leer, um das Registrierungsmodul zu DEAKTIVIEREN. Um die von beiden Seiten empfangenen E-Mails anzupassen, kopieren Sie die Datei '/user/themes/upmorph-online-soon/languages/admin.json' nach '/user/data/upmorph-online-soon/languages.json' und überschreiben Sie diese. Achten Sie auf Wörter, die mit '__' beginnen & enden, sie sind Platzhalter, die im Laufe des Lebenszyklus der Texte angemessen ersetzt werden.
   REGISTRATION_TEXTS: Texts
-  REGISTRATION_TEXTS_BUTTON: Button label
-  REGISTRATION_TEXTS_HELP: The texts to use before & after the registration process. If left empty the default texts will be used.
-  REGISTRATION_TEXTS_EMAIL: Email field placeholder
-  REGISTRATION_TEXTS_NOTIFICATION_ERROR: Notification error
-  REGISTRATION_TEXTS_NOTIFICATION_EXISTS: Notification already exists
-  REGISTRATION_TEXTS_NOTIFICATION_PROGRESS: Notification in progress
-  REGISTRATION_TEXTS_NOTIFICATION_SUCCESS: Notification success
-  REGISTRATION_TEXTS_RESPONSE_ERROR: Registration error
-  REGISTRATION_TEXTS_RESPONSE_EXISTS: Registration already exists
-  REGISTRATION_TEXTS_RESPONSE_SUCCESS: Registration success
-  REGISTRATION_TEXTS_UNDO_ERROR: Undo registration error
-  REGISTRATION_TEXTS_UNDO_NOT_FOUND: Undo registration not found
-  REGISTRATION_TEXTS_UNDO_SUCCESS: Undo registration success
-  SLIDER: Background slider
-  SLIDER_DESC: The list images to use in the slider.<br>Recommended <strong>1920x900</strong> pixels. If left empty the default slides will be used.
-  SLIDER_HELP: The list images to use in the slider. Recommended 1920x900 pixels. If left empty the default slides will be used.
-  SOCIAL_NETWORK: Social network
-  SOCIAL_NETWORKS: Social networks
-  SOCIAL_NETWORKS_DESC: Enter the URL of the landing page on the respective social network.
-  SOCIAL_NETWORKS_ORDER: Order of the networks
-  SOCIAL_NETWORKS_ORDER_HELP: Set the order of the social networks. The 'drag & drop' function is available here.
+  REGISTRATION_TEXTS_BUTTON: Beschriftung des Buttons
+  REGISTRATION_TEXTS_HELP: Die Texte, die vor und nach dem Registrierungsprozess zu verwenden sind. Wenn leer gelassen, werden die Standardtexte verwendet.
+  REGISTRATION_TEXTS_EMAIL: E-Mail-Feld-Platzhalter
+  REGISTRATION_TEXTS_NOTIFICATION_ERROR: Benachrichtigung: Fehler
+  REGISTRATION_TEXTS_NOTIFICATION_EXISTS: Benachrichtigung: bereits vorhanden
+  REGISTRATION_TEXTS_NOTIFICATION_PROGRESS: Benachrichtigung: in Bearbeitung
+  REGISTRATION_TEXTS_NOTIFICATION_SUCCESS: Benachrichtigung: Erfolg
+  REGISTRATION_TEXTS_RESPONSE_ERROR: Registrierung: Fehler
+  REGISTRATION_TEXTS_RESPONSE_EXISTS: Registrierung: bereits vorhanden
+  REGISTRATION_TEXTS_RESPONSE_SUCCESS: Registrierung: Erfolg
+  REGISTRATION_TEXTS_UNDO_ERROR: Registrierung rückgängig machen: Fehler
+  REGISTRATION_TEXTS_UNDO_NOT_FOUND: Registrierung rückgängig machen: nicht gefunden
+  REGISTRATION_TEXTS_UNDO_SUCCESS: Registrierung rückgängig machen: Erfolg
+  RESPONSE_ERROR: Fehler! Die Registrierung ist fehlgeschlagen.
+  RESPONSE_EXISTS: Diese E-Mail-Adresse wurde bereits registriert.
+  RESPONSE_SUCCESS: Die Registrierung war erfolgreich.
+  SLIDER: Diashow im Hintergrund
+  SLIDER_DESC: Die Liste der Bilder, die in der Diashow verwendet werden sollen.<br>Empfohlen <strong>1920x900</strong> Pixel. Wenn leer gelassen wird, werden die Standardbilder verwendet.
+  SLIDER_HELP: Die Liste der Bilder, die in der Diashow verwendet werden sollen. Empfohlene Größe 1920x900 Pixel. Wenn leer gelassen wird, werden die Standard-Folien verwendet.
+  SOCIAL_NETWORK: Soziales Netzwerk
+  SOCIAL_NETWORKS: Soziale Netzwerke
+  SOCIAL_NETWORKS_DESC: Geben Sie die URL der Landing-Page in dem jeweiligen sozialen Netzwerk ein.
+  SOCIAL_NETWORKS_ORDER: Reihenfolge der Netzwerke
+  SOCIAL_NETWORKS_ORDER_HELP: Legen Sie die Reihenfolge der sozialen Netzwerke fest. Die 'Drag & Drop'-Funktion steht hier zur Verfügung.
   SOCIAL_NETWORKS_URLS: URLs
   SOCIAL_NETWORKS_URLS_FACEBOOK: Facebook
   SOCIAL_NETWORKS_URLS_GITHUB: Github
@@ -56,6 +73,6 @@ THEME_UPMORPH_ONSO:
   SOCIAL_NETWORKS_URLS_TWITTER: Twitter
   SOCIAL_NETWORKS_URLS_WHATSAPP: WhatsApp
   SOCIAL_NETWORKS_URLS_XING: Xing
-  TITLE: Site title
-  TITLE_DESC: Should the site title set in the <a href="../config/site" target="_blank">configuration</a> be accessible in the frontend?
-  TITLE_HELP: Should the site title set in the configuration be accessible in the frontend?
+  TITLE: Seitentitel
+  TITLE_DESC: Soll der in der <a href="../config/site" target="_blank">Konfiguration</a> eingestellte Seitentitel im Frontend zugänglich sein?
+  TITLE_HELP: Soll der in der Konfiguration eingestellte Seitentitel im Frontend zugänglich sein?

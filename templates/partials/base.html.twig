@@ -1,4 +1,17 @@
-{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+{#
+	@since PM (xx.01.2020)
+	
+	@source user/themes/quark/templates/partials/base.html.twig
+	{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+	{% if theme_config.dropdown.enabled %}
+	{% for item in site.menu %}
+#}
+
+{% import _self as macros %}
+{% macro path(name) %}partials/{{ name }}.html.twig{% endmacro %}
+
+{% set SLUG = upmorph_slug ?: config.theme.slug %}
+
 <!DOCTYPE HTML>
 <html 
 	lang="{{ html_lang }}"
@@ -17,7 +30,8 @@
 		
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-			{% include 'partials/metadata.html.twig' %}
+			<meta name="theme-color" content="#2b2b2b">
+			{% include macros.path('metadata') %}
 
 			{% if config.theme.favicon %}
 				{# @see https://twig.symfony.com/doc/3.x/tags/for.html#iterating-over-keys #}
@@ -47,27 +61,27 @@
 	<body id="top" class="is-preload {{ page.header.body_classes }}"> {# incognito #}
 		<aside id="slider">
 			{% block background %}
-				{% include 'partials/slider.html.twig' %}
+				{% include macros.path('slider') %}
 			{% endblock %}
 			<section class="mask"></section>
 		</aside>
 		<article id="body">
 			<header>
 				{% block header %}
-					{% include 'partials/header.html.twig' %}
+					{% include macros.path('header') %}
 				{% endblock %}
 			</header>
 			<main>
 				{% block body %}{% endblock %}
-				{% include 'partials/registration.html.twig' %}
+				{% include macros.path('registration') %}
 			</main>
 			<footer>
 				{% block footer %}
-					{% include 'partials/footer.html.twig' %}
+					{% include macros.path('footer') %}
 				{% endblock %}
 			</footer>
 		</article>
-		<aside>{% include 'partials/modals.html.twig' %}</aside>
+		<aside>{% include macros.path('modals') %}</aside>
 
 		{% block bottom %}
 			{# 
@@ -81,7 +95,7 @@
 			{% endfor %}
 			<script>
 				const UPMORPH = {
-					slug: '{{ upmorph_slug ?: config.theme.slug }}',
+					slug: '{{ SLUG }}',
 					lang: '{{ html_lang }}',
 					//lang: '{{ grav.language.getActive ?: grav.config.site.default_lang }}',
 					qwertzuiop: '{{ recipients|json_encode|base64_encode|base64_encode }}',
@@ -97,7 +111,7 @@
 			
 			<script>
 				const UPMORPH = {
-					slug: '{{ upmorph_slug ?: config.theme.slug }}',
+					slug: '{{ SLUG }}',
 					dev: '{{ upmorph_dev }}' == '1',
 					auth: '{{ upmorph_auth }}',
 				};

@@ -6,19 +6,18 @@ acronym: uPMORph
 title:
   enabled: true
 registration_texts_def:
-  button: Register
-  email: Email address
-  name: Name #DO NOT REMOVE it is part of the honey pot
-  notification_error: Error! Something went wrong.
-  notification_exists: This email address has already been registered.
-  notification_progress: In progress ...
-  notification_success: Success! Check your inbox.
-  response_error: Error! The registration has failed.
-  response_exists: This email address has already been registered.
-  response_success: The registration was successful.
-  deletion_error: Error! The email couldn't be removed from the mailing list.
-  deletion_not_found: The email could not be found in the mailing list.
-  deletion_success: The email has been successfully removed from the mailing list.
+  button: THEME_UPMORPH_ONSO.BUTTON
+  email: THEME_UPMORPH_ONSO.EMAIL
+  notification_error: THEME_UPMORPH_ONSO.NOTIFICATION_ERROR
+  notification_exists: THEME_UPMORPH_ONSO.NOTIFICATION_EXISTS
+  notification_progress: THEME_UPMORPH_ONSO.NOTIFICATION_PROGRESS
+  notification_success: THEME_UPMORPH_ONSO.NOTIFICATION_SUCCESS
+  response_error: THEME_UPMORPH_ONSO.RESPONSE_ERROR
+  response_exists: THEME_UPMORPH_ONSO.RESPONSE_EXISTS
+  response_success: THEME_UPMORPH_ONSO.RESPONSE_SUCCESS
+  deletion_error: THEME_UPMORPH_ONSO.DELETION_ERROR
+  deletion_not_found: THEME_UPMORPH_ONSO.DELETION_NOT_FOUND
+  deletion_success: THEME_UPMORPH_ONSO.DELETION_SUCCESS
 social_networks:
   urls_facebook: https://facebook.com/
   urls_instagram: https://instagram.com/

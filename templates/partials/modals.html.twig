@@ -11,7 +11,7 @@
 	{% if theme[id ~'_page'] %} {# TRUE if the page selection is NOT empty #}
 		{% for page in pages.children if object is null %}
 			
-			{% if page.isPage and page.route == theme[id ~'_page'] and page.header.title and page.content %}
+			{% if page.isPage and page.url(false, false, false, true) == theme[id ~'_page'] and page.header.title and page.content %}
 				<div id="{{ id }}" class="modal full standalone {{ active }}" data-target="{{ id }}">
 					<h2>
 						<div class="capital">{{ regex == '' ? page.header.title : page.header.title|regex_replace(regex, '') }}</div>
@@ -43,7 +43,7 @@
 	{% endif %}
 {% endmacro %}
 
-
-{{ _self.modal('about_us', uri, theme, pages, language) }} {# about us #}
-{{ _self.modal('privacy_policy', uri, theme, pages, language, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
-{{ _self.modal('imprint', uri, theme, pages, language) }} {# imprint #}
+{% import _self as macros %}
+{{ macros.modal('about_us', uri, theme, pages, language) }} {# about us #}
+{{ macros.modal('privacy_policy', uri, theme, pages, language, '/(^[^\\[]*\\[|\\][^\\]]*$)/') }} {# privacy policy #}
+{{ macros.modal('imprint', uri, theme, pages, language) }} {# imprint #}

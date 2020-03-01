@@ -6,8 +6,6 @@
 	{% if theme.registration_recipient matches '#^[\\w.%+-]+@[\\w.-]+\.[A-Za-z]{2,}$#' %}
 #}
 
-{# {% import _self as macros %} #}
-
 {% macro registration_response(response, class, data) %}
 	{% set type = null %} {# the response type: success, error, ... #}
 	{% set prefix = null %}
@@ -23,12 +21,12 @@
 
 	{% if type == 'error' %}
 		<section class="notification active error {{ class }}">
-			{{ data[prefix ~ 'error'] }}
+			{{ class == '' ? data[prefix ~ 'error'] : data[prefix ~ 'error']|t }}
 		</section>
 	{% else %}
 		<section class="notification active {{ type }} {{ class }}">
 			{% set type = regex_replace(type, '/-/', '_') %}
-			{{ data[ prefix ~ type ] }}
+			{{ class == '' ? data[prefix ~ type] : data[prefix ~ type]|t }}
 		</section>
 	{% endif %}
 {% endmacro %}
@@ -42,7 +40,7 @@
 		{% if theme.privacy_policy_page %} {# TRUE if the page selection is NOT empty #}
 			{% for page in pages.children if object is null %}
 				
-				{% if page.isPage and page.route == theme.privacy_policy_page and page.header.title and page.content %}
+				{% if page.isPage and page.url(false, false, false, true) == theme.privacy_policy_page and page.header.title and page.content %}
 					<div class="privacy-policy standalone">
 						<div>
 							<input id="privacy_policy_checkbox" type="checkbox" class="privacy-policy">
@@ -74,17 +72,31 @@
 		{% endif %}
 
 		<div class="fields">
-			<input type="text" class="name" placeholder="{{ theme.registration_texts_def.name }}" autocomplete="off">
-			<input type="email" class="email" placeholder="{{ data.email }}" autocomplete="off">
-			<button type="button" {{ object is null ? '' : 'disabled' }}>{{ data.button }}</button>
+			<input type="text" class="name" placeholder="{{ 'THEME_UPMORPH_ONSO.NAME'|t }}" autocomplete="off">
+			{% if class == '' %}
+				<input type="email" class="email" placeholder="{{ data.email }}" autocomplete="off">
+				<button type="button" {{ object is null ? '' : 'disabled' }}>{{ data.button }}</button>
+			{% else %} {# default behaviour #}
+				<input type="email" class="email" placeholder="{{ data.email|t }}" autocomplete="off">
+				<button type="button" {{ object is null ? '' : 'disabled' }}>{{ data.button|t }}</button>
+			{% endif %}
 		</div>
 	</section>
 
-	{% for key in ['progress', 'success', 'exists', 'error'] %}
-		<section class="notification {{ key }}">
-			{{ data['notification_' ~ key] }}
-		</section>
-	{% endfor %}
+	{% set keys = ['progress', 'success', 'exists', 'error'] %}
+	{% if class == '' %}
+		{% for key in keys %}
+			<section class="notification {{ key }}">
+				{{ data['notification_' ~ key] }}
+			</section>
+		{% endfor %}
+	{% else %} {# default behaviour #}
+		{% for key in keys %}
+			<section class="notification {{ key }}">
+				{{ data['notification_' ~ key]|t }}
+			</section>
+		{% endfor %}
+	{% endif %}
 {% endmacro %}
 
 
@@ -94,31 +106,32 @@
 	{% set object = null %}
 	{# {% set language = grav.language.getActive ?: grav.config.site.default_lang %} #}
 	{% set language = html_lang %}
+	{% import _self as macros %}
 	
 	{% if notification %}
 		
 		{% for registration in theme.registration_texts if object is null %}
 			{% if language == registration.language %}
-				{{ _self.registration_response(notification, '', registration) }}
+				{{ macros.registration_response(notification, '', registration) }}
 				{% set object = registration %}
 			{% endif %}
 		{% endfor %}
 		{% if object is null %} {# default behaviour #}
-			{{ _self.registration_response(notification, theme.slug, theme.registration_texts_def) }}
+			{{ macros.registration_response(notification, theme.slug, theme.registration_texts_def) }}
 		{% endif %}
 
 	{% elseif theme.registration_texts %} {# TRUE if the inline selection is NOT empty #}
 
 		{% for registration in theme.registration_texts if object is null %}
 			{% if language == registration.language %}
-				{{ _self.registration_form('', theme, pages, registration) }}
+				{{ macros.registration_form('', theme, pages, registration) }}
 				{% set object = registration %}
 			{% endif %}
 		{% endfor %}
 		{% if object is null %} {# default behaviour #}
-			{{ _self.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
+			{{ macros.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
 		{% endif %}
 	{% else %}
-		{{ _self.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
+		{{ macros.registration_form(theme.slug, theme, pages, theme.registration_texts_def) }}
 	{% endif %}
 {% endif %}

@@ -6,7 +6,7 @@
 
 {% block body %}
 	{% set object = null %}
-
+	
 	{% if config.theme.home_page %} {# TRUE if the page selection is NOT empty #}
 		{# 
 			@see https://learn.getgrav.org/16/themes/theme-vars#pages-object
@@ -19,7 +19,7 @@
 			) %}
 		#}
 		{% for page in pages.children if object is null %}
-			{% if page.isPage and page.route == config.theme.home_page %}
+			{% if page.isPage and page.url(false, false, false, true) == config.theme.home_page %}
 				<section id="home" class="standalone">{{ page.content }}</section>
 				{% set object = page %}
 			{% endif %}
@@ -43,12 +43,10 @@
 	{% endif %}
 	
 	{% if object is null %} {# default behaviour #}
-		<section id="home" class="{{ upmorph_slug ?: config.theme.slug }}">
+		<section id="home" class="{{ SLUG }}">
 			{% markdown %}
 				# {{ config.theme.acronym }}
-				A simple template for telling the world
-				- that you'll launch your next big thing soon or
-				- that your site is currently under maintenance.
+				{{ "THEME_UPMORPH_ONSO.BODY"|t }}
 			{% endmarkdown %}
 		</section>
 	{% endif %}
