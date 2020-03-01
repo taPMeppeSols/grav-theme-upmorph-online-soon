@@ -39,6 +39,8 @@ THEME_UPMORPH_ONSO:
   REGISTRATION_RECIPIENT: Destinataire
   REGISTRATION_RECIPIENTS: Destinataires
   REGISTRATION_RECIPIENTS_HELP: Les administrateurs qui vont recevoir toutes les demandes d'enregistrement des visiteurs. Laissez cette section vide pour DÉACTIVER le module d'enregistrement. Pour personnaliser les courriels reçus par l'une ou l'autre des parties, copiez le fichier "/user/themes/upmorph-online-soon/languages/admin.json" dans "/user/data/upmorph-online-soon/languages.json" et actualisez le. Faites attention aux mots commençant et se terminant par "__", ils sont remplacés de manière adéquate pendant le cycle de vie des textes.
+  REGISTRATION_STATUS_DESC: Le <strong>statut</strong> doit être activé & au moins un <strong>destinataire</strong> doit être défini pour activer le module d'enregistrement.
+  REGISTRATION_STATUS_HELP: Le STATUT doit être activé & au moins un DESTINATAIRE doit être défini pour activer le module d'enregistrement.
   REGISTRATION_TEXTS: Textes
   REGISTRATION_TEXTS_BUTTON: Étiquette du bouton
   REGISTRATION_TEXTS_HELP: Les textes à utiliser avant et après la procédure d'enregistrement. S'ils sont laissés vides, les textes par défaut seront utilisés.
@@ -64,6 +66,8 @@ THEME_UPMORPH_ONSO:
   SOCIAL_NETWORKS_DESC: Entrez l'URL de la page d'accueil du réseau social concerné.
   SOCIAL_NETWORKS_ORDER: Ordre des réseaux
   SOCIAL_NETWORKS_ORDER_HELP: Définir l'ordre des réseaux sociaux. La fonction "glisser-déposer" est disponible ici.
+  SOCIAL_NETWORKS_STATUS_DESC: Le <strong>statut</strong> doit être activé & au moins une <strong>URL</strong> doit être défini pour activer le module d'enregistrement.
+  SOCIAL_NETWORKS_STATUS_HELP: Le STATUT doit être activé & au moins une URL doit être défini pour activer le module d'enregistrement.
   SOCIAL_NETWORKS_URLS: URLs
   SOCIAL_NETWORKS_URLS_FACEBOOK: Facebook
   SOCIAL_NETWORKS_URLS_GITHUB: Github
@@ -73,6 +77,7 @@ THEME_UPMORPH_ONSO:
   SOCIAL_NETWORKS_URLS_TWITTER: Twitter
   SOCIAL_NETWORKS_URLS_WHATSAPP: WhatsApp
   SOCIAL_NETWORKS_URLS_XING: Xing
+  STATUS: Statut
   TITLE: Titre du site
   TITLE_DESC: Le titre du site défini dans la <a href="../config/site" target="_blank">configuration</a> doit-il être accessible dans le frontend ?
   TITLE_HELP: Le titre du site défini dans la configuration doit-il être accessible dans le frontend ?

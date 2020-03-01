@@ -39,6 +39,8 @@ THEME_UPMORPH_ONSO:
   REGISTRATION_RECIPIENT: Empfänger
   REGISTRATION_RECIPIENTS: Empfänger
   REGISTRATION_RECIPIENTS_HELP: Die Administratoren, die alle Besucherregistrierungsanfragen erhalten werden. Lassen Sie diesen Abschnitt leer, um das Registrierungsmodul zu DEAKTIVIEREN. Um die von beiden Seiten empfangenen E-Mails anzupassen, kopieren Sie die Datei '/user/themes/upmorph-online-soon/languages/admin.json' nach '/user/data/upmorph-online-soon/languages.json' und überschreiben Sie diese. Achten Sie auf Wörter, die mit '__' beginnen & enden, sie sind Platzhalter, die im Laufe des Lebenszyklus der Texte angemessen ersetzt werden.
+  REGISTRATION_STATUS_DESC: Der <strong>status</strong> muss aktiviert werden und mindestens ein <strong>Empfänger</strong> muss eingestellt werden, um das Registrierungsmodul zu aktivieren.
+  REGISTRATION_STATUS_HELP: Der STATUS muss aktiviert werden und mindestens ein EMPFÄNGER muss eingestellt werden, um das Registrierungsmodul zu aktivieren.
   REGISTRATION_TEXTS: Texts
   REGISTRATION_TEXTS_BUTTON: Beschriftung des Buttons
   REGISTRATION_TEXTS_HELP: Die Texte, die vor und nach dem Registrierungsprozess zu verwenden sind. Wenn leer gelassen, werden die Standardtexte verwendet.
@@ -64,6 +66,8 @@ THEME_UPMORPH_ONSO:
   SOCIAL_NETWORKS_DESC: Geben Sie die URL der Landing-Page in dem jeweiligen sozialen Netzwerk ein.
   SOCIAL_NETWORKS_ORDER: Reihenfolge der Netzwerke
   SOCIAL_NETWORKS_ORDER_HELP: Legen Sie die Reihenfolge der sozialen Netzwerke fest. Die 'Drag & Drop'-Funktion steht hier zur Verfügung.
+  SOCIAL_NETWORKS_STATUS_DESC: Der <strong>status</strong> muss aktiviert werden und mindestens eine <strong>URL</strong> muss eingestellt werden, um das Registrierungsmodul zu aktivieren.
+  SOCIAL_NETWORKS_STATUS_HELP: Der STATUS muss aktiviert werden und mindestens eine URL muss eingestellt werden, um das Registrierungsmodul zu aktivieren.
   SOCIAL_NETWORKS_URLS: URLs
   SOCIAL_NETWORKS_URLS_FACEBOOK: Facebook
   SOCIAL_NETWORKS_URLS_GITHUB: Github
@@ -73,6 +77,7 @@ THEME_UPMORPH_ONSO:
   SOCIAL_NETWORKS_URLS_TWITTER: Twitter
   SOCIAL_NETWORKS_URLS_WHATSAPP: WhatsApp
   SOCIAL_NETWORKS_URLS_XING: Xing
+  STATUS: Status
   TITLE: Seitentitel
   TITLE_DESC: Soll der in der <a href="../config/site" target="_blank">Konfiguration</a> eingestellte Seitentitel im Frontend zugänglich sein?
   TITLE_HELP: Soll der in der Konfiguration eingestellte Seitentitel im Frontend zugänglich sein?
