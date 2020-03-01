@@ -1,11 +1,11 @@
 # v2020.14
 ## 01.03.2020
 1. [](#improved)
-   * Modul social networks: the status check has been added.
    * Global `THEME` object: `{% set THEME = config.theme %}`.
    * Global `LANG` object: `{% set LANG = html_lang %}`.
+   * Module social networks: the status check has been added.
 2. [](#bugfix)
-   * Modul registration: the status check has been added to simplify the deactivation of the module.
+   * Module registration: the status check has been added to simplify the deactivation of the module.
 
 
 # v2020.13
