@@ -20,12 +20,12 @@
 >
 	<head>
 		{% block head %}
-			<meta charset="utf-8" />
+			<meta charset="utf-8"/>
 			<title>
-					{% if config.theme.title.enabled %} 
-						{{ site.title|e('html') }} 
-						{% if header.title %} :: {{ header.title|e('html') }}{% endif %}
-					{% elseif header.title %} {{ header.title|e('html') }}{% endif %}
+				{% if config.theme.title.enabled %} 
+					{{ site.title|e('html') }} 
+					{% if header.title %} :: {{ header.title|e('html') }}{% endif %}
+				{% else %}{{ header.title|e('html') }}{% endif %}
 			</title>
 		
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">

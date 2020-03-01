@@ -5,6 +5,5 @@
 		- or over a function in the frontend only available to admins
 - Improvements
 	- Test the theme on Safari
-	- Translate the admin language script in French & German
 	- Write an explicit documentation for the registration actions.
 		Currently the documentation is done over the `_desc` & `_help` properties in the blueprints
