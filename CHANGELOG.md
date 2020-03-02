@@ -1,7 +1,7 @@
 # v2020.15
 ## 02.03.2020
 1. [](#bugfix)
-   * Creation of the `user-data/upmorph-online-soon` directory during the activation of the theme.
+   * Creation of the `user-data://upmorph-online-soon` directory during the activation of the theme.
   
 
 # v2020.14
