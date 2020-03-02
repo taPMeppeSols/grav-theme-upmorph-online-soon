@@ -1,5 +1,5 @@
 THEME_UPMORPH_ONSO:
-  BODY: Un modèle simple pour dire au monde<br>- que vous allez bientôt lancer votre prochain grand projet ou<br>- que votre site est actuellement en cours de maintenance.
+  BODY: Un modèle simple pour dire au monde<ul><li>que vous allez bientôt lancer votre prochain grand projet ou</li><li>que votre site est actuellement en cours de maintenance.</li></ul>
   BUTTON: S'enregistrer
   CONTENT: Contenu
   DELETION_ERROR: Erreur ! L'adresse e-mail n'a pas pu être supprimée de la liste de diffusion.

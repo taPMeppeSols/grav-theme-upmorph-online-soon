@@ -1,5 +1,5 @@
 THEME_UPMORPH_ONSO:
-  BODY: Eine einfache Vorlage, um der Welt mitzuteilen,<br>-dass Sie Ihr nächstes großes Ding bald starten werden oder<br>-dass Ihre Website derzeit gewartet wird.
+  BODY: Eine einfache Vorlage, um der Welt mitzuteilen,<ul><li>dass Sie Ihr nächstes großes Ding bald starten werden oder</li><li>dass Ihre Website derzeit gewartet wird.</li></ul>
   BUTTON: Registrieren
   CONTENT: Inhalt
   DELETION_ERROR: Fehler! Die E-Mail-Adresse konnte nicht von der Mailingliste entfernt werden.

@@ -1,5 +1,5 @@
 THEME_UPMORPH_ONSO:
-  BODY: A simple template for telling the world<br>- that you'll launch your next big thing soon or<br>- that your site is currently under maintenance.
+  BODY: A simple template for telling the world<ul><li>that you'll launch your next big thing soon or</li><li>that your site is currently under maintenance.</li></ul>
   BUTTON: Register
   CONTENT: Content
   DELETION_ERROR: Error! The email address couldn't be removed from the mailing list.

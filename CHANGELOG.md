@@ -2,6 +2,7 @@
 ## 02.03.2020
 1. [](#bugfix)
    * Creation of the `user-data://upmorph-online-soon` directory during the activation of the theme.
+   * languages/de.yaml, languages/en.yaml, languages/fr.yaml
   
 
 # v2020.14
