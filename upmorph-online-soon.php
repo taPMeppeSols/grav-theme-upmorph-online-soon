@@ -130,13 +130,16 @@
 				preg_match( "/^192\.168\.\\d+\.\\d+$/", gethostbyname($temp = gethostname()) ) && $temp == "tapmeppe" &&
 				php_uname('s') == "Windows NT" && php_uname('n') == "TAPMEPPE" && php_uname('m') == "AMD64"
 			;
+			
+			//the theme name & the directory in which the system specific data will by stored
 			self::$locator = Grav::instance()['locator'];
-
 			//self::$theme = basename(__DIR__); //the theme name
-			//self::$dir = self::path(dirname(__DIR__, 2), 'data', self::$theme); //the directory in which the system specific data will by stored
-			self::$theme = basename(self::$thm = self::$locator->findResource('theme://')); //the theme name
-			self::$dir = self::$locator->findResource('user-data://'. self::$theme);
-			if(!is_dir(self::$dir)) mkdir(self::$dir, 0775, true); //create the directory if not existant
+			self::$theme = basename(self::$thm = self::$locator->findResource('theme://')); //the theme -path & -name
+			if( !(self::$dir = self::$locator->findResource('user-data://'. self::$theme)) ) mkdir( //invoked if the directory doesn't exit yet
+				self::$dir = self::path(dirname(__DIR__, 2), 'data', self::$theme), //custom path finding way
+				0775, 
+				true
+			);
 
 			self::$slug = explode('-', self::$theme)[0];
 			self::$auth = self::$slug .'_auth_code';
