@@ -1,6 +1,8 @@
 # v2020.17
 ## 09.08.2020
-1. [](#bugfix)
+1. [](#improved)
+   * [Edge Chromium](https://www.microsoft.com/edge) has been tested and is now fully supported.
+2. [](#bugfix)
    * `upmorph-online-soon.php` the trailing comma on line 260 has been removed.
    * The deprecated function `User::load` has been replaced by the new function used to load user accounts.
 

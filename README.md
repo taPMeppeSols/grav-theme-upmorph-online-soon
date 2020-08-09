@@ -74,9 +74,9 @@ The following browsers have been test and are fully supported:
 - [Chrome](https://www.google.com/chrome/) (version 80.0.3987.122 x64-bit)
 - [Firefox](https://www.mozilla.org/firefox/) (version 73.0.1 x64-bit)
 - [Edge](https://www.microsoft.com/edge) (version 44.18362.449.0)
+- [Edge Chromium](https://www.microsoft.com/edge) (version 84.0.522.52 x64-bit)
 
 The following browsers are still up for testing:
-- [Edge Chromium](https://www.microsoft.com/edge)
 - [Safari](https://www.apple.com/safari/)
 
 
