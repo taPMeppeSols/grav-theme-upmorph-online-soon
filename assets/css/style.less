@@ -43,7 +43,7 @@
 
 
 //#### FUNCTIONS #####
-.fct_h(@size){
+.fct_fs(@size){
 	font-size: @size;
 	line-height: @dim;
 
@@ -52,33 +52,40 @@
 	}
 }
 
-.fct_h_100 { height: 100%; }
 .fct_hide { display: none }
 .fct_pointer { cursor: pointer }
 .fct_roboto { font-family: "robotoregular",sans-serif }
 .fct_transition(@duration, @property: opacity){
+	transition: @property @duration ease-in-out;
+	/*
 	-moz-transition: @property @duration ease-in-out;
 	-webkit-transition: @property @duration ease-in-out;
 	-ms-transition: @property @duration ease-in-out;
-	transition: @property @duration ease-in-out;
+	*/
 }
 .fct_transition_start {
+	transform: translateX(0);
+	/* @PM (09.08.2020) @deprecated less implicitly takes care of these variations
 	-moz-transform: translateX(0);
 	-webkit-transform: translateX(0);
 	-ms-transform: translateX(0);
-	transform: translateX(0);
+	*/
 }
 .fct_transition_end {
+	transform: translateX(-25%); 
+	/* @PM (09.08.2020) @deprecated less implicitly takes care of these variations
 	-moz-transform: translateX(-25%);
 	-webkit-transform: translateX(-25%);
 	-ms-transform: translateX(-25%);
-	transform: translateX(-25%); 
+	*/
 }
 .fct_animation(@duration){
+	animation: bg @duration linear infinite;
+	/* @PM (09.08.2020) @deprecated less implicitly takes care of these variations
 	-moz-animation: bg @duration linear infinite;
 	-webkit-animation: bg @duration linear infinite;
 	-ms-animation: bg @duration linear infinite;
-	animation: bg @duration linear infinite;
+	*/
 }
 
 
@@ -89,12 +96,12 @@ body
 	margin: 0;
 	padding: 0;
 	border: 0;
-	.fct_h_100;
+	height: 100%;
 	width: 100%;
 	overflow: hidden;
 }
 body {
-	.fct_roboto;
+	.fct_roboto();
 	font-size: @dim_pt;
 	font-weight: 400;
 	line-height: @dim + @dim_2;
@@ -117,12 +124,12 @@ body {
 		margin-top: 0;
 		margin-bottom: @dim_2; //half of the self font-size
 	}
-	h1 { .fct_h(@dim * 4) }
-	h2 { .fct_h(@dim * 3 + @dim_2) }
-	h3 { .fct_h(@dim * 3) }
-	h4 { .fct_h(@dim * 2 + @dim_2) }
-	h5 { .fct_h(@dim * 2) }
-	h6 { .fct_h(@dim + @dim_2) }
+	h1 { .fct_fs(@dim * 4) }
+	h2 { .fct_fs(@dim * 3 + @dim_2) }
+	h3 { .fct_fs(@dim * 3) }
+	h4 { .fct_fs(@dim * 2 + @dim_2) }
+	h5 { .fct_fs(@dim * 2) }
+	h6 { .fct_fs(@dim + @dim_2) }
 	ul { padding-left: @dim + @dim_2 }
 	a { 
 		color: @color_green;
@@ -136,12 +143,12 @@ body {
 	button ,
 	.button
 	{
-		.fct_roboto;
+		.fct_roboto();
 		font-weight: 700;
 		text-align: center;
 		padding: @dim_pt;
 		.fct_transition(@duration, all);
-		.fct_pointer;
+		.fct_pointer();
 		white-space: nowrap;
 
 		&.button-underline:hover { text-decoration: underline }
@@ -163,10 +170,12 @@ body {
 		
 		div.slide {
 			opacity: 0;
+			transition: opacity 3s ease;
+			/*
 			-moz-transition: opacity 3s ease;
 			-webkit-transition: opacity 3s ease;
 			-ms-transition: opacity 3s ease;
-			transition: opacity 3s ease;
+			*/
 			background-size: cover;
 			background-repeat: no-repeat;
 			background-position: center center;
@@ -187,10 +196,12 @@ body {
 				&.top { z-index: 10; }
 			}
 			&:only-child {
+				animation-direction: alternate !important;
+				/* @PM (09.08.2020) @deprecated less implicitly takes care of these variations
 				-moz-animation-direction: alternate !important;
 				-webkit-animation-direction: alternate !important;
 				-ms-animation-direction: alternate !important;
-				animation-direction: alternate !important; 
+				*/
 			}
 		}
 		section.mask {
@@ -217,7 +228,7 @@ body {
 			//height: 15%;
 			margin-bottom: @dim_margin*2;
 
-			//* { .fct_h_100 }
+			//* { height: 100% }
 			a.logo > img { 
 				max-height: 100px;
 				&.upmorph { margin-left: -10% } //visual correction of taPMeppe solutions logo
@@ -300,6 +311,7 @@ body {
 
 			> section {
 				&:nth-child(n+2) { margin-top: @dim * 2; }
+				&#home strong { color: @color_green }
 				&#registration > div {
 					&.privacy-policy {
 						@dim_privacy: 1.5em;
@@ -327,12 +339,12 @@ body {
 							}
 						}
 						input[type=checkbox] {
-							.fct_hide;
+							.fct_hide();
 
 							~ label.checkbox {
 								position: relative;
 								display: block;
-								.fct_pointer;
+								.fct_pointer();
 								
 								/**
 								 * @source https://getbootstrap.com/docs/4.4/components/forms/
@@ -424,7 +436,7 @@ body {
 	
 							width: 75%; //empiric value; the rest is for the button
 							height: @dim * 3;
-							.fct_roboto;
+							.fct_roboto();
 							font-weight: bold;
 			
 							.fct_transition(@duration, all);
@@ -450,7 +462,7 @@ body {
 								~ button { font-size: @dim }
 							}
 							&.name { //this is the honeypot
-								.fct_hide!important;
+								.fct_hide()!important;
 								position: fixed;
 								top: -100%
 							}
@@ -473,7 +485,7 @@ body {
 							&:not(:disabled){
 								background: @color_green;
 								border: darken(@color_green, 10%) solid 1px;
-								//.fct_pointer;
+								//.fct_pointer();
 								
 								&:hover { 
 									background: lighten(@color_green, 10%); 
@@ -491,7 +503,7 @@ body {
 					font-weight: bold;
 					background: @color_bg_transp;
 		
-					&:not(.active){ .fct_hide }
+					&:not(.active){ .fct_hide() }
 					/* #alternative
 					&:not(.success):not(.error){
 						border-left-color: @color_yellow;
@@ -547,7 +559,7 @@ body {
 						padding: @dim_li_padding*2;
 						background: @color_font;
 						border-radius: 50%;
-						.fct_pointer;
+						.fct_pointer();
 	
 						@media screen and (min-width: @dim_vp_large_min){
 							font-size: 1.25em;
@@ -561,7 +573,7 @@ body {
 		}
 	}
 	div.modal {
-		&:not(.active){ .fct_hide }
+		&:not(.active){ .fct_hide() }
 
 		&.full {
 			position: fixed;
@@ -600,19 +612,21 @@ body {
 }
 
 //transitions
+@keyframes bg {
+	0% { .fct_transition_start() }
+	100% { .fct_transition_end() } 
+}
+/* @PM (09.08.2020) @deprecated less implicitly takes care of these variations
 @-moz-keyframes bg {
-	0% { .fct_transition_start }
-	100% { .fct_transition_end } 
+	0% { .fct_transition_start() }
+	100% { .fct_transition_end() } 
 }
 @-webkit-keyframes bg {
-	0% { .fct_transition_start }
-	100% { .fct_transition_end } 
+	0% { .fct_transition_start() }
+	100% { .fct_transition_end() } 
 }
 @-ms-keyframes bg {
-	0% { .fct_transition_start }
-	100% { .fct_transition_end } 
+	0% { .fct_transition_start() }
+	100% { .fct_transition_end() } 
 }
-@keyframes bg {
-	0% { .fct_transition_start }
-	100% { .fct_transition_end } 
-}
+*/

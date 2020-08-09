@@ -6,8 +6,8 @@
 It is based on the free template [Eventually | HTML5 UP](https://html5up.net/eventually). :loudspeaker: :+1:
 
 It should be used as kickass placeholding template to
-- either comfort the public until your kickass project/app/product/startup launches (online soon) :construction: ,
-- or set your site on maintenance (**back** online soon) :hammer_and_wrench: . 
+- either comfort the public until your kickass project/app/product/startup launches (**online soon**) :construction: ,
+- or set your site on maintenance (**_back_ online soon**) :hammer_and_wrench: . 
 
 
 # Installation :nut_and_bolt:

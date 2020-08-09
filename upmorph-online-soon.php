@@ -3,7 +3,7 @@
 	 * @see https://learn.getgrav.org/16/forms/forms/reference-form-actions
 	 * $this->grav['language']->translate('PLUGIN_FORM.ERROR_VALIDATING_CAPTCHA');
 	 * 
-	 * @example 
+	 * @example development
 	 * - http://upmorph.grav.meppe/en
 	 * - http://upmorph.grav.meppe/admin
 	 * - http://localhost/solutions/upmorph/cms_grav_empty/en
@@ -12,7 +12,6 @@
 	namespace Grav\Theme;
 
 	use Grav\Common\{Theme, Grav, Utils};
-	use Grav\Common\User\User;
 	use RocketTheme\Toolbox\Event\Event;
 	use Grav\Common\Processors\Events\RequestHandlerEvent;
 
@@ -52,12 +51,13 @@
 					$users = \AdminAddonUserManager\Users\Manager::$instance->users();
 					foreach($users as $user) if($user['email']) self::$recipients[$user['email'] . self::sep . $user['language'] . self::sep . $user['title']] = $user['email'] ." - ". $user['title']; //alternative: $user['fullname']
 				}else{
-					$files = ($dir = Grav::instance()['locator']->findResource('account://')) ? 
+					$grav = Grav::instance();
+					$files = ($dir = $grav['locator']->findResource('account://')) ? 
 						array_diff(scandir($dir), ['.', '..']) : 
 						[]
 					;
 					foreach ($files as $file) if(Utils::endsWith($file, YAML_EXT)){
-						$user = User::load( trim(pathinfo($file, PATHINFO_FILENAME)) );
+						$user = $grav['accounts']->load( trim(pathinfo($file, PATHINFO_FILENAME)) );
 						//$users[$user->username] = $user;
 						if($user['email']) self::$recipients[$user['email'] . self::sep . $user['language'] . self::sep . $user['title']] = $user['email'] ." - ". $user['title']; //alternative: $user['fullname']
 					}
@@ -135,11 +135,12 @@
 			self::$locator = Grav::instance()['locator'];
 			//self::$theme = basename(__DIR__); //the theme name
 			self::$theme = basename(self::$thm = self::$locator->findResource('theme://')); //the theme -path & -name
-			if( !(self::$dir = self::$locator->findResource('user-data://'. self::$theme)) ) mkdir( //invoked if the directory doesn't exit yet
-				self::$dir = self::path(dirname(__DIR__, 2), 'data', self::$theme), //custom path finding way
-				0775, 
-				true
-			);
+			if( !(self::$dir = self::$locator->findResource('user-data://'. self::$theme)) ) 
+				mkdir( //invoked if the directory doesn't exit yet
+					self::$dir = self::path(dirname(__DIR__, 2), 'data', self::$theme), //custom path finding way
+					0775, 
+					true
+				);
 
 			self::$slug = explode('-', self::$theme)[0];
 			self::$auth = self::$slug .'_auth_code';
@@ -180,7 +181,7 @@
 		function onRequestHandlerInit(RequestHandlerEvent $event){
 			/**
 			 * PM (18.12.2019) registration block
-			 * - the sign up process is done according to the GDPR directive
+			 * - the sign up process is done according to the European GDPR directive
 			 */
 			//echo '<pre>'.print_r($_SERVER, true);die();
 			if( isset($_REQUEST[self::$auth]) ){
@@ -191,7 +192,7 @@
 			 	 * @see URI: https://learn.getgrav.org/16/api#class-gravcommonuri
 				 * @example $uri = $this->grav['uri'];
 				 * 
-				 * I decide to use a custom to be in control with the result
+				 * I decide to use a custom to be in control of the result
 				 */
 				$this->url = ($_SERVER["HTTPS"] == "on" ? "https://" : "http://") . $_SERVER["SERVER_NAME"] . explode('?', $_SERVER["REQUEST_URI"])[0];
 				$this->now = date("Y-m-d H:i:s");
@@ -257,7 +258,7 @@
 									'visitor', 
 									$texts[$this->lang] ?: $texts[self::lang], //`self::lang` security measure
 									['__URL_PAGE__', '__URL_CONFIRMATION__', '__TITLE__'], 
-									[$this->url, $url, $this->title], 
+									[$this->url, $url, $this->title]
 								);
 								if($sent) $response = self::success;
 
@@ -289,7 +290,6 @@
 					$emails = $this->read(self::emails);
 	
 					//check the availability of the alias
-					$found;
 					if($data = $aliases[$alias]) $found = true;
 					else{
 						foreach($emails as $email) if($email[self::alias] == $alias){ //TRUE if the alias has already been used in the past

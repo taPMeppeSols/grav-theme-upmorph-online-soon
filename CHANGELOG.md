@@ -1,4 +1,10 @@
-# v2020.15
+# v2020.17
+## 09.08.2020
+1. [](#bugfix)
+   * `upmorph-online-soon.php` the trailing comma on line 260 has been removed.
+   * The deprecated function `User::load` has been replaced by the new function used to load user accounts.
+
+# v2020.15-16
 ## 02.03.2020
 1. [](#bugfix)
    * Creation of the `user-data://upmorph-online-soon` directory during the activation of the theme.
