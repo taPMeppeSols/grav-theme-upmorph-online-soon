@@ -1,5 +1,7 @@
 # uPMORph online soon :cool: :new: :soon:
 
+## This repository has been archived. In the future it will be available under the name [grav-theme-tapmorph-maintenance](https://github.com/taPMeppeSols/grav-theme-tapmorph-maintenance).
+
 ![Screenshot](screenshot.jpg)
 
 **uPMORph online soon** is a theme developed by [taPMeppe solutions](https://tapmeppe.solutions) for the [GRAV CMS](https://getgrav.org/). 
